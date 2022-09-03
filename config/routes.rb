@@ -1,42 +1,7 @@
 Rails.application.routes.draw do
-  namespace :public do
-    get 'users/show'
-    get 'users/edit'
-  end
-  namespace :admin do
-    get 'post_comments/index'
-  end
-  namespace :admin do
-    get 'post_recipes/index'
-    get 'post_recipes/show'
-  end
-  namespace :admin do
-    get 'users/index'
-    get 'users/show'
-    get 'users/edit'
-  end
-  namespace :admin do
-    get 'foods/edit'
-  end
-  namespace :admin do
-    get 'homes/top'
-  end
-  namespace :public do
-    get 'shopping_lists/index'
-  end
-  namespace :public do
-    get 'post_comments/index'
-  end
-  namespace :public do
-    get 'post_recipes/index'
-    get 'post_recipes/new'
-    get 'post_recipes/show'
-    get 'post_recipes/edit'
-  end
-  namespace :public do
-    get 'homes/top'
-    get 'homes/about'
-  end
+  root to: 'public/homes#top'
+  get '/about' => 'public/homes#about'
+
   devise_for :admin, skip: [:registrations, :passwords], controllers: {
     sessions: "admin/sessions"
   }
@@ -45,4 +10,22 @@ Rails.application.routes.draw do
     sessions: 'public/sessions'
   }
 
+  namespace :admin do
+    get '/' => 'homes#top'
+    resources :foods, only: [:create, :edit, :update, :destroy]
+    resources :users, only: [:indes, :show, :edit, :update]
+    resources :post_recipes, only: [:index, :show, :destroy]
+    resources :post_comments, only: [:index, :destroy]
+  end
+  namespace :public do
+    get '/users/my_page' => 'users#show'
+    delete '/shopping_lists/destroy_all' => 'shopping_lists#destroy_all'
+    resources :users, only: [:show, :edit, :update]
+    resources :post_recipes, only: [:index, :new, :create, :show, :edit, :update, :destroy]
+    resources :ingredints, only: [:create, :update, :destroy]
+    resources :making_recipes, only: [:create, :update, :destroy]
+    resources :post_comments, only: [:index, :create, :destroy]
+    resources :favorites, only: [:create, :destroy]
+    resources :shopping_lists, only: [:index, :create, :update, :destroy]
+  end
 end
