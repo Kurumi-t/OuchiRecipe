@@ -1,2 +1,36 @@
-<h1>Public::Users#show</h1>
-<p>Find me in app/views/public/users/show.html.erb</p>
+<div class="container">
+  <h2><%= @user.name %>さんのマイページ</h2>
+  <div class="row pt-4">
+    <div class="col-3">
+      <%= link_to("冷蔵庫へ", fridges_path(@user.id), class: "btn btn-success px-4 ml-5") %>
+      <p>食材の登録</p>
+    </div>
+    <div class="col-3">
+      <%= link_to("レシピを書く", new_post_recipe_path, class: "btn btn-success px-4 ml-5") %>
+      <p>おすすめレシピを登録</p>
+    </div>
+    <div class="col-3">
+      <%= link_to("プロフィール編集", edit_user_path(@user.id), class: "btn btn-success px-4 ml-5") %>
+      <p><%= @user.name %>さんの登録情報を編集</p>
+    </div>
+  </div>
+  <div class="row mt-3">
+    <h3><b><%= @user_name %>さんのレシピ</b><%= @post_recipe_count %>品</h3>
+    <% if @user.post_recipe_count = 0 %>
+      <p>
+        <%= current_user_name %>さんのレシピはまだありません。<br>
+        よく作るレシピなどを書いてみよう！
+      </p>
+    <% else %>
+      <% @post_recipes.each do |post_recipe| %>
+      <div class="col-8">
+        <%= link_to(post_recipe_path(post_recipe.id), class: "text-dark") do %>
+          <%= image_tag post_recipe.get_image(180,100) %>
+          <p><%= post_recipe.title %></p>
+        <% end %>
+      </div>
+      <% end %>
+    <% end %>
+    </div>
+  </div>
+</div>

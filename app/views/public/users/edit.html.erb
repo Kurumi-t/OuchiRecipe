@@ -1,2 +1,21 @@
-<h1>Public::Users#edit</h1>
-<p>Find me in app/views/public/users/edit.html.erb</p>
+<div class="container">
+  <h2><%= @user.name %>さんのプロフィール編集</h2>
+  <div class="row pt-4">
+    <%= form_with model: @user do |f| %>
+      <div class="field">
+        <%= f.label :ユーザー名 %>
+        <%= f.text_field :name, class: "form-control border-dark" %>
+      </div>
+      <div class="field">
+        <%= f.label :メールアドレス %>
+        <%= f.email_field :email, autofocus: true, autocomplete: "email", class: "form-control border-dark" %>
+      </div>
+      <div class="form-group row mt-3">
+        <div class="offset-md-3 col-4">
+          <%= f.submit '変更する', class:"col-12 btn btn-success mr-5 font-weight-bold" %>
+          <%= link_to("マイページへ戻る", users_my_page_path, class: "col-12 btn btn-danger font-weight-bold") %>
+        </div>
+      </div>
+    <% end %>
+  </div>
+</div>
