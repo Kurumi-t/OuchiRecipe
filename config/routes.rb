@@ -17,7 +17,7 @@ Rails.application.routes.draw do
     resources :post_recipes, only: [:index, :show, :destroy]
     resources :post_comments, only: [:index, :destroy]
   end
-  namespace :public do
+  scope module: :public do
     get '/users/my_page' => 'users#show'
     delete '/shopping_lists/destroy_all' => 'shopping_lists#destroy_all'
     resources :users, only: [:show, :edit, :update]
