@@ -26,6 +26,7 @@ Rails.application.routes.draw do
     resources :making_recipes, only: [:create, :update, :destroy]
     resources :post_comments, only: [:index, :create, :destroy]
     resources :favorites, only: [:create, :destroy]
+    resources :fridges, only: [:index, :create, :update, :destroy]
     resources :shopping_lists, only: [:index, :create, :update, :destroy]
   end
 end

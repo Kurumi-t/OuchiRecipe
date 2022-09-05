@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2022_09_03_080812) do
+ActiveRecord::Schema.define(version: 2022_09_05_061747) do
 
   create_table "admins", force: :cascade do |t|
     t.string "email", default: "", null: false
@@ -36,6 +36,14 @@ ActiveRecord::Schema.define(version: 2022_09_03_080812) do
     t.integer "genre", default: 0, null: false
     t.string "unit", null: false
     t.integer "weight_per_unit", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+  end
+
+  create_table "fridges", force: :cascade do |t|
+    t.integer "user_id", null: false
+    t.integer "food_id", null: false
+    t.decimal "amount", null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
   end
