@@ -1,2 +1,26 @@
-<h1>Admin::Foods#edit</h1>
-<p>Find me in app/views/admin/foods/edit.html.erb</p>
+<div class="container">
+  <h2>食材編集</h2>
+  <div class="row pt-3">
+    <%= form_with model: @food, url: admin_food_path, method: :PATCH, local: true do |f| %>
+      <div class="col-2 field">
+        <%= f.label :食材名 %>
+        <%= f.text_field :food_name, placeholder: 'キャベツ', class: "mx-5" %>
+      </div>
+      <div class="col-2 field">
+        <%= f.label :ジャンル %>
+        <%= f.select :genre, Food.genres.keys.map { |k| [I18n.t("enums.food.genre.#{k}"), k]},{},{class:"form-control form-control-sm text-center"} %>
+      </div>
+      <div class="col-2 field">
+        <%= f.label :単位 %>
+        <%= f.text_field :unit, placeholder: '個', class: "mx-5" %>
+      </div>
+      <div class="col-2 field">
+        <%= f.label :１単位あたりの重さ %>
+        約<%= f.number_field :weight_per_unit, class: "mx-5", min: 1, max: 1000 %>g
+      </div>
+      <div class="actions">
+        <%= f.submit '変更を保存', class:"btn btn-success font-weight-bold px-4" %>
+      </div>
+    <% end %>
+  </div>
+</div>
