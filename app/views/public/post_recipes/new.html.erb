@@ -1,2 +1,97 @@
-<h1>Public::PostRecipes#new</h1>
-<p>Find me in app/views/public/post_recipes/new.html.erb</p>
+<div class="container">
+  <h3>レシピを書く</h3>
+  <div class="row pt-3">
+  <%= form_with model: @post_recipe, url: post_recipes_path, method: :POST, local: true do |f| %>
+    <div class="col-10 field">
+      <h4>料理の写真をのせる<%= f.file_field :image, accept: "image/*" %></h4>
+    </div>
+    <div class="col-10 field">
+      <h4>レシピのタイトル（20文字まで）</h4>
+      <%= f.text_field :title, placeholder: 'ハンバーグ', class: "mx-5" %>
+    </div>
+    <div class="actions">
+      <%= f.submit 'レシピを投稿する', class:"btn btn-success font-weight-bold px-4" %>
+    </div>
+  <% end %>
+  </div>
+  <div class="row pt-3">
+  <%= form_with model: @ingredient, url: ingredints_path, method: :POST, local: true do |f| %>
+    <div class="col-10 field">
+      <h4>材料</h4>
+      <%= f.text_field :serving, placeholder: '2人分', class: "mx-5" %>
+    </div>
+    <table class="col-10 mt-3 table border-bottom">
+      <thead class="bg-light">
+        <tr>
+          <th class="col-2">ジャンル</th>
+          <th class="text-center">食材・調味料</th>
+          <th class="text-center">分量</th>
+          <th class="text-center"></th>
+          <th class="text-center">その他分量</th>
+        </tr>
+      </thead>
+      <tbody class="table-borderless">
+        <tr>
+          <td class="align-middle"><%= f.select :genre, Food.genres.keys.map { |k| [I18n.t("enums.food.genre.#{k}"), k]},{},{class:"form-control form-control-sm text-center"} %></td>
+          <td><%= f.select :food_id, options_from_collection_for_select(Food.all, :id, :food_name), {prompt: "選択してください"},{},{class:"form-control form-control-sm text-center"} %></td>
+          <td class="align-middle"><%= f.number_field :amount, class: "mx-5", min: 1, max: 2000 %></td>
+          <td class="align-middle"><%= food.unit %></td>
+          <td class="align-middle"><%= f.text_field :other_amount, placeholder: '小さじ１', class: "mx-5" %></td>
+        </tr>
+      </tbody>
+    </table>
+    <div class="actions">
+      <%= f.submit 'レシピを投稿する', class:"btn btn-success font-weight-bold px-4" %>
+    </div>
+  <% end %>
+  </div>
+  <div class="row pt-3">
+  <%= form_with model: @ingredient, url: ingredints_path, method: :POST, local: true do |f| %>
+    <h4>作り方</h4>
+    <div class="col-10 field">
+      ①<%= f.text_field :last_name, class: "form-control border-dark" %>
+    </div>
+    <div class="col-10 field">
+      ②<%= f.text_field :last_name, class: "form-control border-dark" %>
+    </div>
+    <div class="col-10 field">
+      ③<%= f.text_field :last_name, class: "form-control border-dark" %>
+    </div>
+    <div class="col-10 field">
+      ④<%= f.text_field :last_name, class: "form-control border-dark" %>
+    </div>
+    <div class="col-10 field">
+      ⑤<%= f.text_field :last_name, class: "form-control border-dark" %>
+    </div>
+    <div class="col-10 field">
+      ⑥<%= f.text_field :last_name, class: "form-control border-dark" %>
+    </div>
+    <div class="col-10 field">
+      ⑦<%= f.text_field :last_name, class: "form-control border-dark" %>
+    </div>
+    <div class="col-10 field">
+      ⑧<%= f.text_field :last_name, class: "form-control border-dark" %>
+    </div>
+    <div class="col-10 field">
+      ⑨<%= f.text_field :last_name, class: "form-control border-dark" %>
+    </div>
+    <div class="col-10 field">
+      ⑩<%= f.text_field :last_name, class: "form-control border-dark" %>
+    </div>
+    <div class="actions">
+      <%= f.submit 'レシピを投稿する', class:"btn btn-success font-weight-bold px-4" %>
+    </div>
+  </div>
+  <div class="row pt-3">
+  <%= form_with model: @post_recipe, url: post_recipes_path, method: :POST, local: true do |f| %>
+    <div class="col-10 field">
+      <h4>コツ・おすすめ・ひとこと</h4>
+      <%= f.text_area :advice, class: "form-control border-dark" %>
+    </div>
+    <div class="actions">
+      <%= f.submit 'レシピを投稿する', class:"btn btn-success font-weight-bold px-4" %>
+    </div>
+  <% end %>
+  </div>
+</div>
+
