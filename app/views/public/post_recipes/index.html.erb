@@ -1,2 +1,23 @@
-<h1>Public::PostRecipes#index</h1>
-<p>Find me in app/views/public/post_recipes/index.html.erb</p>
+<div class="container">
+  <h3>レシピ一覧</h3>
+  <div class="row pt-3">
+    <table class="col-8 mt-3 table border-bottom">
+      <tbody class="table-borderless">
+      <% @post_recipes.each do |post_recipe| %>
+        <tr>
+          <td class="align-middle">
+            <%= link_to(post_recipe_path(post_recipe.id), class: "text-dark") do %>
+              <%= image_tag post_recipe.get_image(200,100) %>
+            <% end %>
+          </td>
+          <td>
+            <%= link_to(post_recipe_path(post_recipe.id), class: "text-dark") do %><%= post_recipe.title %><% end %><br>
+            <%= post_recipe.user.name %>
+          </td>
+          <td class="align-middle text-center">♡<%= post_recipe.favorites_count %></td>
+        </tr>
+      <% end %>
+      </tbody>
+    </table>
+  </div>
+</div>
