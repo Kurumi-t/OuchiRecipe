@@ -1,8 +1,8 @@
 class Public::UsersController < ApplicationController
   def show
     @user = current_user
-   # @post_recipes = PostRecipe.page(params[:page]).per(8)
-    #@post_recipe_count = @user.post_recipe.all.count
+    @post_recipes = @user.post_recipes.page(params[:page]).per(8)
+    @post_recipe_count = @user.post_recipes.all.count
   end
 
   def edit
