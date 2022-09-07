@@ -7,7 +7,7 @@
     </div>
     <div class="col-10 field">
       <h4>レシピのタイトル（20文字まで）</h4>
-      <%= f.text_field :title, placeholder: 'ハンバーグ', class: "mx-5" %>
+      <%= f.text_field :title, maxlength: '20', placeholder: 'ハンバーグ', class: "mx-5" %>
     </div>
     <div class="actions">
       <%= f.submit 'レシピを投稿する', class:"btn btn-success font-weight-bold px-4" %>
@@ -32,10 +32,13 @@
       </thead>
       <tbody class="table-borderless">
         <tr>
-          <td class="align-middle"><%= f.select :genre, Food.genres.keys.map { |k| [I18n.t("enums.food.genre.#{k}"), k]},{},{class:"form-control form-control-sm text-center"} %></td>
-          <td><%= f.select :food_id, options_from_collection_for_select(Food.all, :id, :food_name), {prompt: "選択してください"},{},{class:"form-control form-control-sm text-center"} %></td>
-          <td class="align-middle"><%= f.number_field :amount, class: "mx-5", min: 1, max: 2000 %></td>
-          <td class="align-middle"><%= food.unit %></td>
+          <td class="align-middle">
+            <%= form_with model: @post_recipe, url: post_recipe_path, method: :PATCH, local: true do |f| %>
+              <%= f.select :genre, Food.genres.keys.map { |k| [I18n.t("enums.food.genre.#{k}"), k]},{},{class:"form-control form-control-sm text-center"} %></td>
+            <% end %>
+          <td><%= f.select :food_id, @foods.map{ |food| [food.food_name, food.id] }, {prompt: "選択してください"},{class:"form-control form-control-sm text-center"} %></td>
+          <td class="align-middle"><%= f.number_field :amount, step: "0.1", class: "mx-5", min: 0, max: 2000 %></td>
+          <td class="align-middle">unit</td>
           <td class="align-middle"><%= f.text_field :other_amount, placeholder: '小さじ１', class: "mx-5" %></td>
         </tr>
       </tbody>
@@ -82,6 +85,7 @@
       <%= f.submit 'レシピを投稿する', class:"btn btn-success font-weight-bold px-4" %>
     </div>
   </div>
+  <% end %>
   <div class="row pt-3">
   <%= form_with model: @post_recipe, url: post_recipes_path, method: :POST, local: true do |f| %>
     <div class="col-10 field">
