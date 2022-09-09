@@ -33,16 +33,16 @@
       <tbody class="table-borderless">
         <tr>
           <td class="align-middle">
-            <%= form_with model: @post_recipe, url: post_recipe_path, method: :PATCH, local: true do |f| %>
-              <%= f.select :genre, Food.genres.keys.map { |k| [I18n.t("enums.food.genre.#{k}"), k]},{},{class:"form-control form-control-sm text-center"} %></td>
-            <% end %>
-          <td><%= f.select :food_id, @foods.map{ |food| [food.food_name, food.id] }, {prompt: "選択してください"},{class:"form-control form-control-sm text-center"} %></td>
+              <%= f.select :genre, Food.genres.keys.map { |k| [I18n.t("enums.food.genre.#{k}"), k] }, { prompt: "食材ジャンルを選択してください" }, { class:"parent form-control form-control-sm text-center", id:"parent" } %></td>
+          <td>
+            <%= f.select :food_id, @foods.map{ |food| [food.food_name, food.id] }, { prompt: "食材を選択してください" }, { class:"children form-control form-control-sm text-center", id:"children" } %>
+
+            </td>
           <td class="align-middle"><%= f.number_field :amount, step: "0.1", class: "mx-5", min: 0, max: 2000 %></td>
           <td class="align-middle">unit</td>
           <td class="align-middle"><%= f.text_field :other_amount, placeholder: '小さじ１', class: "mx-5" %></td>
         </tr>
       </tbody>
-      <%= javascript_pack_tag 'select_change' %>
     </table>
     <div class="actions">
       <%= f.submit 'レシピを投稿する', class:"btn btn-success font-weight-bold px-4" %>
