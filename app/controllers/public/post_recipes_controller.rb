@@ -6,28 +6,33 @@ class Public::PostRecipesController < ApplicationController
   def new
     @post_recipe = PostRecipe.new
     @foods = Food.all
-    #if @food.genre == "vegetable"
-    #  @foods = Food.find_by(genre: 'vegetable')
-    #end
   end
 
   def create
     @post_recipe = PostRecipe.new(post_recipe_params)
-    @post_recipe.save
-    redirect_to post_recipe_path(@post_recipe.id)
+    @post_recipe.user_id = current_user.id
+    if @post_recipe.save
+      redirect_to post_recipe_path(@post_recipe.id)
+    else
+      render :new
+    end
   end
 
   def show
+    @post_recipe = PostRecipe.find(params[:id])
   end
 
   def edit
+    @post_recipe = PostRecipe.find(params[:id])
   end
 
   def update
     @post_recipe = PostRecipe.find(params[:id])
-    @post_recipe.update
-    redirect_to post_recipe_path(@post_recipe.id)
-
+    if @post_recipe.update
+      redirect_to post_recipe_path(@post_recipe.id)
+    else
+      render :edit
+    end
   end
 
   def destroy
@@ -36,14 +41,9 @@ class Public::PostRecipesController < ApplicationController
 
   private
   def post_recipe_params
-    params.require(:post_recipe).permit(:recipe_image, :title, :advice, :is_draft)
-  end
-
-  def ingredient_params
-    params.require(:ingredient).permit(:serving, :amount, :other_amount)
-  end
-
-  def making_recipe_params
-    params.require(:making_recipe).permit(:recipe)
+    params.require(:post_recipe).permit(:recipe_image, :title, :advice, :is_draft,
+      ingredients_attributes: [:serving, :amount, :other_amount],
+      making_recipes_attributes: [:recipe]
+    )
   end
 end
