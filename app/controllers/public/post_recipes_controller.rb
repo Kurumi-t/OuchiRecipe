@@ -5,7 +5,6 @@ class Public::PostRecipesController < ApplicationController
 
   def new
     @post_recipe = PostRecipe.new
-    @foods = Food.all
   end
 
   def create
