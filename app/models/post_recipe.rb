@@ -24,4 +24,11 @@ class PostRecipe < ApplicationRecord
   def favorited_by?(user)
     favorites.exists?(user_id: user.id)
   end
+  def self.looks(searches, words)
+    if searches == "perfect_match"
+      @post_recipe = PostRecipe.where("title LIKE ?", "#{words}")
+    else
+      @post_recipe = PostRecipe.where("title LIKE ?", "%#{words}%")
+    end
+  end
 end

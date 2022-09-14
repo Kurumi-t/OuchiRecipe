@@ -5,4 +5,11 @@ class Ingredient < ApplicationRecord
 
   validates :serving, presence: true
   validates :amount, presence: true
+  def self.looks(searches, words)
+    if searches == "perfect_match"
+      @ingredient = Ingredient.where("food_name LIKE ?", "#{words}")
+    else
+      @ingredient = Ingredient.where("food_name LIKE ?", "%#{words}%")
+    end
+  end
 end
