@@ -5,6 +5,8 @@ class Public::PostRecipesController < ApplicationController
 
   def new
     @post_recipe = PostRecipe.new
+    @post_recipe.ingredients.new
+    @post_recipe.making_recipes.new
   end
 
   def create
@@ -19,6 +21,7 @@ class Public::PostRecipesController < ApplicationController
 
   def show
     @post_recipe = PostRecipe.find(params[:id])
+    @ingredients = @post_recipe.ingredients
   end
 
   def edit
@@ -36,6 +39,10 @@ class Public::PostRecipesController < ApplicationController
 
   def destroy
 
+  end
+
+  def search
+    @post_recipes = PostRecipe.search(params[:word])
   end
 
   private
