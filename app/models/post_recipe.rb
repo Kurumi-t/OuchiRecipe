@@ -11,6 +11,7 @@ class PostRecipe < ApplicationRecord
 
   has_one_attached :recipe_image
   validates :title, presence: true
+  validates :serving, presence: true
   validates :advice, presence: true
   validates :is_draft, presence: true
 
@@ -24,11 +25,7 @@ class PostRecipe < ApplicationRecord
   def favorited_by?(user)
     favorites.exists?(user_id: user.id)
   end
-  def self.looks(searches, words)
-    if searches == "perfect_match"
-      @post_recipe = PostRecipe.where("title LIKE ?", "#{words}")
-    else
-      @post_recipe = PostRecipe.where("title LIKE ?", "%#{words}%")
-    end
+  def self.search(words)
+    @post_recipe = PostRecipe.where("title LIKE ?", "%#{words}%")
   end
 end
