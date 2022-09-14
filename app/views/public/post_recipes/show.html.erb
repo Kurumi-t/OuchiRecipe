@@ -1,18 +1,18 @@
 <div class="container">
   <div class="row pt-3">
     <div class="col-6">
-      <%= image_tag get_recipe_image(200,200) %>
+      <%= image_tag @post_recipe.get_recipe_image(200,200) %>
     </div>
     <div class="col-6">
       <h4><%= @post_recipe.title %></h4>
       <p>
         <% if @post_recipe.favorited_by?(current_user) %>
-          <%= link_to post_recipe_favorites_path(@post_recipe), method: :delete do %>
+          <%= link_to favorites_path(@post_recipe), method: :delete do %>
             ♥<%= @post_recipe.favorites.count %>
           <% end %>
         <% else %>
-          <%= link_to post_image_favorites_path(@post_image), method: :post do %>
-            ♡<%= @post_image.favorites.count %> いいね
+          <%= link_to favorite_path(@post_recipe), method: :post do %>
+            ♡<%= @post_recipe.favorites.count %> いいね
           <% end %>
         <% end %>
       </p>
