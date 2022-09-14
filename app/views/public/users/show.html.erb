@@ -25,7 +25,7 @@
       <% @post_recipes.each do |post_recipe| %>
       <div class="col-8">
         <%= link_to(post_recipe_path(post_recipe.id), class: "text-dark") do %>
-          <%= image_tag post_recipe.get_image(180,100) %>
+          <%= image_tag post_recipe.get_recipe_image(180,100) %>
           <p><%= post_recipe.title %></p>
         <% end %>
       </div>
