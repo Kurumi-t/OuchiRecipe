@@ -5,8 +5,8 @@ class Public::PostRecipesController < ApplicationController
 
   def new
     @post_recipe = PostRecipe.new
-    @post_recipe.ingredients.new
-    @post_recipe.making_recipes.new
+    @ingredients = @post_recipe.ingredients.build
+    @making_recipes = @post_recipe.making_recipes.build ##親モデル.子モデル.buildで子モデルのインスタンス作成
   end
 
   def create
@@ -22,6 +22,7 @@ class Public::PostRecipesController < ApplicationController
   def show
     @post_recipe = PostRecipe.find(params[:id])
     @ingredients = @post_recipe.ingredients
+    @making_recipes =@post_recipe.making_recipes
   end
 
   def edit
@@ -47,9 +48,9 @@ class Public::PostRecipesController < ApplicationController
 
   private
   def post_recipe_params
-    params.require(:post_recipe).permit(:recipe_image, :title, :advice, :is_draft,
-      ingredients_attributes: [:serving, :amount, :other_amount],
-      making_recipes_attributes: [:recipe]
+    params.require(:post_recipe).permit(:recipe_image, :serving, :title, :advice, :is_draft,
+      ingredients_attributes: [:id, :food_name, :amount, :other_amount, :_destroy],
+      making_recipes_attributes: [:id, :recipe, :_destroy]
     )
   end
 end
