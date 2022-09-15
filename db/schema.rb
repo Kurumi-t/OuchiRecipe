@@ -79,7 +79,7 @@ ActiveRecord::Schema.define(version: 2022_09_06_115732) do
   create_table "ingredients", force: :cascade do |t|
     t.integer "food_id", null: false
     t.integer "post_recipe_id", null: false
-    t.string "serving", null: false
+    t.string "food_name", null: false
     t.decimal "amount", null: false
     t.string "other_amount"
     t.datetime "created_at", precision: 6, null: false
@@ -104,6 +104,7 @@ ActiveRecord::Schema.define(version: 2022_09_06_115732) do
   create_table "post_recipes", force: :cascade do |t|
     t.integer "user_id", null: false
     t.string "title", null: false
+    t.string "serving", null: false
     t.text "advice", null: false
     t.boolean "is_draft", default: true, null: false
     t.datetime "created_at", precision: 6, null: false
