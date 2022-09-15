@@ -62,3 +62,6 @@ gem "enum_help"
 gem 'kaminari','~> 1.2.1'
 
 gem 'image_processing'
+
+gem 'cocoon'
+gem 'jquery-rails'
