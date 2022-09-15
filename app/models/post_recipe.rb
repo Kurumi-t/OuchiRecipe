@@ -1,13 +1,10 @@
 class PostRecipe < ApplicationRecord
   belongs_to :user, optional: true
   has_many :ingredients, dependent: :destroy
-  accepts_nested_attributes_for :ingredients
-  has_many :foods
-  accepts_nested_attributes_for :foods
   has_many :making_recipes, dependent: :destroy
-  accepts_nested_attributes_for :making_recipes
   has_many :post_comments, dependent: :destroy
   has_many :favorites, dependent: :destroy
+  accepts_nested_attributes_for :ingredients, :making_recipes, allow_destroy: true
 
   has_one_attached :recipe_image
   validates :title, presence: true
