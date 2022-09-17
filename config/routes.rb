@@ -14,19 +14,21 @@ Rails.application.routes.draw do
     get '/' => 'homes#top'
     resources :foods, only: [:index, :create, :edit, :update, :destroy]
     resources :users, only: [:show, :edit, :update]
-    resources :post_recipes, only: [:index, :show, :destroy]
-    resources :post_comments, only: [:index, :destroy]
+    resources :post_recipes, only: [:index, :show, :destroy] do
+      resources :post_comments, only: [:index, :destroy]
+    end
   end
   scope module: :public do
     get 'search' => 'searches#search'
     get '/users/my_page' => 'users#show'
     delete '/shopping_lists/destroy_all' => 'shopping_lists#destroy_all'
     resources :users, only: [:show, :edit, :update]
-    resources :post_recipes, only: [:index, :new, :create, :show, :edit, :update, :destroy]
+    resources :post_recipes, only: [:index, :new, :create, :show, :edit, :update, :destroy] do
+      resources :post_comments, only: [:new, :index, :create, :destroy]
+      resources :favorites, only: [:create, :destroy]
+    end
     resources :ingredints, only: [:create, :update, :destroy]
     resources :making_recipes, only: [:create, :update, :destroy]
-    resources :post_comments, only: [:index, :create, :destroy]
-    resources :favorites, only: [:create, :destroy]
     resources :fridges, only: [:index, :create, :update, :destroy]
     resources :shopping_lists, only: [:index, :create, :update, :destroy]
   end
