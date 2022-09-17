@@ -1,2 +1,42 @@
-<h1>Public::PostComments#index</h1>
-<p>Find me in app/views/public/post_comments/index.html.erb</p>
+<div class="container">
+  <div class="row pt-3">
+    <h5>
+      <%= link_to(post_recipe_path(post_recipe.id), class: "text-dark") do %>
+        <%= @post_recipe.title %>
+      <% end %>のコメント　<%= @post_comment_count %>件
+    </h5>
+    <div class="col-10">
+      <%= form_with model: @post_comment, url: post_recipe_post_comments_path, method: :POST, local: true do |f| %>
+        <%= f.text_field :comment, placeholder: "コメントを書く", class: "form-control me-2 justif" %>
+        <%= f.submit "コメントする", class:"btn btn-success font-weight-bold px-4"%>
+      <% end %>
+    </div>
+    <div class="col-10">
+      <% if @post_comment_count == 0 %>
+        <p>
+          コメントはまだありません。<br>
+          <%= @post_recipe.title %>に対するコメントを書こう！
+        </p>
+      <% else %>
+        <% @post_comments.each do |post_comment| %>
+          <table class="col-10 mt-3 table border-bottom">
+            <tbody class="table-borderless">
+              <tr>
+                <td><%= post_comment.comment %></td>
+              </tr>
+              <tr>
+                <td><%= post_comment.created_at.strftime('%Y/%m/%d') %></td>
+                <td><% post_comment.user.name %></td>
+              </tr>
+            </tbody>
+          </table>
+          <% if post_comment.user = current_user %>
+            <div class="col-3">
+              <%= link_to("削除する", post_recipe_post_comment_path(post_comment.id), method: :delete, class: "btn btn-danger font-weight-bold mx-2") %>
+            </div>
+          <% end %>
+        <% end %>
+      <% end %>
+    </div>
+  </div>
+</div>
