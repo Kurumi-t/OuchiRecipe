@@ -10,7 +10,6 @@ import "channels"
 import "popper.js";
 import "bootstrap";
 import "../stylesheets/application"
-import "select_change.js"
 
 require('jquery')
 require('cocoon')
