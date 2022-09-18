@@ -1,17 +1,17 @@
 <div class="container">
   <div class="row pt-3">
     <div class="col-6">
-      <%= image_tag @post_recipe.get_recipe_image(200,200) %>
+      <%= image_tag @post_recipe.get_recipe_image(477,360) %>
     </div>
     <div class="col-6">
       <h4><%= @post_recipe.title %></h4>
       <p>
         <% if @post_recipe.favorited_by?(current_user) %>
-          <%= link_to favorites_path(@post_recipe), method: :delete do %>
+          <%= link_to post_recipe_favorites_path(@post_recipe), method: :delete do %>
             ♥<%= @post_recipe.favorites.count %>
           <% end %>
         <% else %>
-          <%= link_to favorite_path(@post_recipe), method: :post do %>
+          <%= link_to post_recipe_favorites_path(@post_recipe), method: :post do %>
             ♡<%= @post_recipe.favorites.count %> いいね
           <% end %>
         <% end %>
@@ -21,23 +21,23 @@
         <%= link_to "買い物リストへ追加", shopping_lists_path, class: "btn btn-outline-light text-dark mx-4" %>
       </div>
       <div>
-        <%= link_to "コメントへ", shopping_lists_path, class: "btn btn-outline-light text-dark mx-4" %>
+        <%= link_to "コメントへ", post_recipe_post_comments_path(@post_recipe), class: "btn btn-outline-light text-dark mx-4" %>
       </div>
     <% if @post_recipe.user == current_user %>
       <div>
         <%= link_to "編集する", edit_post_recipe_path, class: "btn btn-outline-light text-dark mx-4" %>
       </div>
       <div>
-        <%= link_to "削除する", post_recipe_path(@post_recipe.id), method: :delete, class: "btn btn-danger btn-outline-light text-dark mx-4" %>
+        <%= link_to "削除する", post_recipe_path(@post_recipe), method: :delete, class: "btn btn-danger btn-outline-light text-dark mx-4" %>
       </div>
     <% end %>
     </div>
   </div>
   <div class="row pt-3">
     <div class="col-6">
-      <p>材料(<%= @ingredient.serving %>)</p>
+      <p>材料(<%= @post_recipe.serving %>)</p>
       <table class="col-10 mt-3 table border-bottom">
-        <% @ingredients each do |ingredient| %>
+        <% @ingredients.each do |ingredient| %>
         <tbody class="table-borderless">
           <tr>
             <td class="align-middle text_left"><%= ingredient.food_name %></td>
@@ -50,7 +50,7 @@
     <div class="col-6">
       <p>作り方</p>
       <table class="col-10 mt-3 table border-bottom">
-        <% @making_recipes each do |making_recipe| %>
+        <% @making_recipes.each do |making_recipe| %>
         <tbody class="table-borderless">
           <tr>
             <td class="align-middle text_left"><%= making_recipe.recipe %></td>
