@@ -4,7 +4,7 @@ class PostRecipe < ApplicationRecord
   has_many :making_recipes, dependent: :destroy
   has_many :post_comments, dependent: :destroy
   has_many :favorites, dependent: :destroy
-  accepts_nested_attributes_for :ingredients, :making_recipes, allow_destroy: true
+  accepts_nested_attributes_for :ingredients, :making_recipes, allow_destroy: true, reject_if: :all_blank
 
   has_one_attached :recipe_image
   validates :title, presence: true
@@ -14,7 +14,7 @@ class PostRecipe < ApplicationRecord
 
   def get_recipe_image(width, height)
     unless recipe_image.attached?
-      file_path = Rails.root.join('app/assets/images/No-image.png')
+      file_path = Rails.root.join('app/assets/images/No-image.jpg')
       recipe_image.attach(io: File.open(file_path), filename: 'recipe-default-image.jpg', content_type: 'image/jpeg')
     end
     recipe_image.variant(resize_to_limit: [width, height]).processed
