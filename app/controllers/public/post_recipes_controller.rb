@@ -5,8 +5,8 @@ class Public::PostRecipesController < ApplicationController
 
   def new
     @post_recipe = PostRecipe.new
-    @ingredients = @post_recipe.ingredients.build
-    @making_recipes = @post_recipe.making_recipes.build ##親モデル.子モデル.buildで子モデルのインスタンス作成
+    5.times { @post_recipe.ingredients.new }
+    @post_recipe.making_recipes.new
   end
 
   def create
@@ -22,7 +22,7 @@ class Public::PostRecipesController < ApplicationController
   def show
     @post_recipe = PostRecipe.find(params[:id])
     @ingredients = @post_recipe.ingredients
-    @making_recipes =@post_recipe.making_recipes
+    @making_recipes = @post_recipe.making_recipes
   end
 
   def edit
@@ -39,7 +39,12 @@ class Public::PostRecipesController < ApplicationController
   end
 
   def destroy
-
+    @post_recipe = PostRecipe.find(params[:id])
+    if @post_recipe.destroy
+      redirect_to users_my_page_path(current_user.id)
+    else
+      render :show
+    end
   end
 
   def search
@@ -49,8 +54,8 @@ class Public::PostRecipesController < ApplicationController
   private
   def post_recipe_params
     params.require(:post_recipe).permit(:recipe_image, :serving, :title, :advice, :is_draft,
-      ingredients_attributes: [:id, :food_name, :amount, :other_amount, :_destroy],
-      making_recipes_attributes: [:id, :recipe, :_destroy]
+      ingredients_attributes: [:id, :post_recipe_id, :food_name, :amount, :other_amount, :_destroy],
+      making_recipes_attributes: [:id, :post_recipe_id, :recipe, :_destroy]
     )
   end
 end
