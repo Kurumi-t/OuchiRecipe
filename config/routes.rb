@@ -24,11 +24,11 @@ Rails.application.routes.draw do
     delete '/shopping_lists/destroy_all' => 'shopping_lists#destroy_all'
     resources :users, only: [:show, :edit, :update]
     resources :post_recipes, only: [:index, :new, :create, :show, :edit, :update, :destroy] do
-      resources :post_comments, only: [:new, :index, :create, :destroy]
-      resources :favorites, only: [:create, :destroy]
+      resource :favorites, only: [:create, :destroy]
+      resources :ingredints, only: [:create, :update, :destroy]
+      resources :making_recipes, only: [:create, :update, :destroy]
+      resources :post_comments, only: [:index, :create, :destroy]
     end
-    resources :ingredints, only: [:create, :update, :destroy]
-    resources :making_recipes, only: [:create, :update, :destroy]
     resources :fridges, only: [:index, :create, :update, :destroy]
     resources :shopping_lists, only: [:index, :create, :update, :destroy]
   end
