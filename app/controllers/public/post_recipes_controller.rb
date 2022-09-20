@@ -5,8 +5,8 @@ class Public::PostRecipesController < ApplicationController
 
   def new
     @post_recipe = PostRecipe.new
-    5.times { @post_recipe.ingredients.new }
-    5.times { @post_recipe.making_recipes.new }
+    @post_recipe.ingredients.new
+    @post_recipe.making_recipes.new
   end
 
   def create
