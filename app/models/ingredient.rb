@@ -3,8 +3,6 @@ class Ingredient < ApplicationRecord
   belongs_to :shopping_list, optional: true
 
   validates :food_name, presence: true
-  validates :unit, presence: true
-  validates :amount, presence: true
   def self.search(words)
     @ingredient = Ingredient.where("food_name LIKE ?", "%#{words}%")
   end

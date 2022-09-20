@@ -72,8 +72,8 @@ ActiveRecord::Schema.define(version: 2022_09_06_115732) do
   create_table "ingredients", force: :cascade do |t|
     t.integer "post_recipe_id", null: false
     t.string "food_name", null: false
-    t.string "unit", null: false
-    t.decimal "amount", null: false
+    t.string "unit"
+    t.decimal "amount"
     t.string "other_amount"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
