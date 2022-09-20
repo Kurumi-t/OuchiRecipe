@@ -6,7 +6,7 @@ class Public::PostRecipesController < ApplicationController
   def new
     @post_recipe = PostRecipe.new
     5.times { @post_recipe.ingredients.new }
-    @post_recipe.making_recipes.new
+    5.times { @post_recipe.making_recipes.new }
   end
 
   def create
@@ -31,7 +31,7 @@ class Public::PostRecipesController < ApplicationController
 
   def update
     @post_recipe = PostRecipe.find(params[:id])
-    if @post_recipe.update
+    if @post_recipe.update(post_recipe_params)
       redirect_to post_recipe_path(@post_recipe.id)
     else
       render :edit
@@ -54,7 +54,7 @@ class Public::PostRecipesController < ApplicationController
   private
   def post_recipe_params
     params.require(:post_recipe).permit(:recipe_image, :serving, :title, :advice, :is_draft,
-      ingredients_attributes: [:id, :post_recipe_id, :food_name, :amount, :other_amount, :_destroy],
+      ingredients_attributes: [:id, :post_recipe_id, :food_name, :unit, :amount, :other_amount, :_destroy],
       making_recipes_attributes: [:id, :post_recipe_id, :recipe, :_destroy]
     )
   end

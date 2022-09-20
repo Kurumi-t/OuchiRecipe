@@ -1,11 +1,10 @@
 <div class="container">
   <div class="row pt-3">
     <div class="col-6">
-      <%= image_tag @post_recipe.get_recipe_image(477,360) %>
+      <%= image_tag @post_recipe.get_recipe_image(400,400) %>
     </div>
     <div class="col-6">
-      <h4><%= @post_recipe.title %></h4>
-      <p>
+      <p><span class="h4 mr-2"><%= @post_recipe.title %></span>
         <% if @post_recipe.favorited_by?(current_user) %>
           <%= link_to post_recipe_favorites_path(@post_recipe), method: :delete do %>
             ♥<%= @post_recipe.favorites.count %>
@@ -16,7 +15,7 @@
           <% end %>
         <% end %>
       </p>
-      <p><%= @post_recipe.user.name %></p>
+      <p><%= image_tag @post_recipe.user.get_profile_image(30,30) %><%= @post_recipe.user.name %></p>
       <div>
         <%= link_to "買い物リストへ追加", shopping_lists_path, class: "btn btn-outline-light text-dark mx-4" %>
       </div>
@@ -40,8 +39,8 @@
         <% @ingredients.each do |ingredient| %>
         <tbody class="table-borderless">
           <tr>
-            <td class="align-middle text_left"><%= ingredient.food_name %></td>
-            <td class="align-middle text_right"><%= ingredient.amount %><%= ingredient.unit %><%= ingredient.other_amountserving %></td>
+            <td class="align-middle text_left"><%= link_to ingredient.food_name, ingredient_search_path(ingredient.food_name) %></td>
+            <td class="align-middle text_right"><%= rounded_decimel(ingredient.amount) %><%= ingredient.unit %><%= ingredient.other_amount %></td>
           </tr>
         </tbody>
         <% end %>

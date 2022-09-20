@@ -1,0 +1,7 @@
+<div class="row form-group nested-fields">
+  <div class="col-3"><%= f.text_field :food_name, placeholder: 'キャベツ' %></div>
+  <div class="col-2"><%= f.number_field :amount, step: "0.1", min: 0, max: 2000 %></div>
+  <div class="col-2"><%= f.text_field :unit, placeholder: '個、g' %></div>
+  <div class="col-3"><%= f.text_field :other_amount, placeholder: '小さじ１' %></div>
+  <div class="col-2"><%= link_to_remove_association '削除', f %></div>
+</div>
