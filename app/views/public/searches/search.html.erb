@@ -1,10 +1,10 @@
-<% if @range == "PostRecipe" %>
-    <% @post_recipes.each do |post_recipe| %>
+<div class="container">
+  <h3>検索したレシピ</h3>
+  <div class="row pt-3">
+    <div class="col-10 field">
+      <% @post_recipes.each do |post_recipe| %>
         <%= post_recipe.title %>
-    <% end %>
-<% else %>
-    <% @posts.each do |post| %>
-        <%= post.title %>  　//例(投稿のタイトルを表示)
-        <%= post.text %>   　//例(投稿の本文を表示)
-    <% end %>
-<% end %>
+      <% end %>
+    </div>
+  </div>
+</div>
