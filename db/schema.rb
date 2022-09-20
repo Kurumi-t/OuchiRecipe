@@ -59,27 +59,20 @@ ActiveRecord::Schema.define(version: 2022_09_06_115732) do
     t.datetime "updated_at", precision: 6, null: false
   end
 
-  create_table "foods", force: :cascade do |t|
-    t.string "food_name", null: false
-    t.integer "genre", default: 0, null: false
-    t.string "unit", null: false
-    t.integer "weight_per_unit", null: false
-    t.datetime "created_at", precision: 6, null: false
-    t.datetime "updated_at", precision: 6, null: false
-  end
-
   create_table "fridges", force: :cascade do |t|
     t.integer "user_id", null: false
-    t.integer "food_id", null: false
+    t.string "food_name", null: false
+    t.integer "genre", null: false
     t.decimal "amount", null: false
+    t.string "unit", null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
   end
 
   create_table "ingredients", force: :cascade do |t|
-    t.integer "food_id", null: false
     t.integer "post_recipe_id", null: false
     t.string "food_name", null: false
+    t.string "unit", null: false
     t.decimal "amount", null: false
     t.string "other_amount"
     t.datetime "created_at", precision: 6, null: false
@@ -112,9 +105,10 @@ ActiveRecord::Schema.define(version: 2022_09_06_115732) do
   end
 
   create_table "shopping_lists", force: :cascade do |t|
-    t.integer "post_recipe_id"
+    t.integer "ingredient_id"
+    t.integer "fridge_id"
     t.integer "user_id"
-    t.integer "food_id"
+    t.string "food_name"
     t.decimal "amount"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
