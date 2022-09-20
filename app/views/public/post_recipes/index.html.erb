@@ -7,14 +7,14 @@
         <tr>
           <td class="align-middle">
             <%= link_to(post_recipe_path(post_recipe.id), class: "text-dark") do %>
-              <%= image_tag post_recipe.get_image(200,100) %>
+              <%= image_tag post_recipe.get_recipe_image(200,100) %>
             <% end %>
           </td>
           <td>
             <%= link_to(post_recipe_path(post_recipe.id), class: "text-dark") do %><%= post_recipe.title %><% end %><br>
             <%= post_recipe.user.name %>
           </td>
-          <td class="align-middle text-center">♡<%= post_recipe.favorites_count %></td>
+          <td class="align-middle text-center">♡<%= post_recipe.favorites.count %></td>
         </tr>
       <% end %>
       </tbody>
