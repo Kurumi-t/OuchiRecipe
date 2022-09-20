@@ -16,7 +16,7 @@
         <div class="nested-fields mx-auto">
           <div class="mx-auto">
             <%= link_to_add_association "+食材を追加", f, :ingredients, class: "btn btn-secondary btn-block",
-              data: {association_insertion_node: '#detail-association-insertion-point', association_insertion_method: 'after'}%>
+              data: {association_insertion_node: '#detail-association-insertion-point', association_insertion_method: 'append'}%>
           </div>
         </div>
       </div>
@@ -31,7 +31,7 @@
         <div class="nested-fields mx-auto">
           <div class="mx-auto">
             <%= link_to_add_association "+作り方を追加", f, :making_recipes, class: "btn btn-secondary btn-block",
-              data: {association_insertion_node: '#detail-association-insertion-point2', association_insertion_method: 'after'}%>
+              data: {association_insertion_node: '#detail-association-insertion-point2', association_insertion_method: 'append'}%>
           </div>
         </div>
       </div>
