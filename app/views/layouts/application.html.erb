@@ -46,12 +46,10 @@
         </nav>
         <div class="text-center">
           <p>おうちにある食材からレシピを検索する</p>
-          <form class="col-3 d-flex ml-auto" role="search">
-            <%= form_with url: search_path, method: :get, local: :true do |f| %>
+            <%= form_with url: search_path, method: :get, local: :true, class:"col-3 d-flex ml-auto" do |f| %>
               <%= f.text_field :word, placeholder: "ハンバーグ", class: "form-control me-2 justif" %>
               <%= f.submit "検索" %>
             <% end %>
-          </form>
         </div>
       </div>
     </header>
