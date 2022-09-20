@@ -20,6 +20,7 @@ Rails.application.routes.draw do
   end
   scope module: :public do
     get 'search' => 'searches#search'
+    get 'ingredient_search/:ingredient_name' => 'searches#ingredient_search',as: 'ingredient_search'
     get '/users/my_page' => 'users#show'
     delete '/shopping_lists/destroy_all' => 'shopping_lists#destroy_all'
     resources :users, only: [:show, :edit, :update]
