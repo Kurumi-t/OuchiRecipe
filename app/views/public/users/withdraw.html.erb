@@ -1,0 +1,16 @@
+<div class="container">
+  <div class="row pt-3">
+    <div class="col-8 mx-auto">
+      <h5 class="text-center"><b>本当に退会しますか？</b></h5>
+      <p class="text-center h5 pt-5">
+        退会手続きをされますと、サービスがご利用いただけなくなります。<br>
+        再度ご利用をいただく場合には、新規登録のお手続きが必要になります。<br>
+        本当に退会してよろしいですか？
+      </p>
+      <div class="col-12 text-center mt-5">
+        <%= link_to("退会しない", users_my_page_path, class: "btn btn-primary px-4 mr-3") %>
+        <%= link_to("退会する", users_withdraw_update_path, method: :patch, data: { confirm: "【確認】本当に退会しますか？" }, class: "btn btn-danger px-4") %>
+      </div>
+    </div>
+  </div>
+</div>

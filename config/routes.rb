@@ -23,6 +23,8 @@ Rails.application.routes.draw do
     get 'ingredient_search/:ingredient_name' => 'searches#ingredient_search',as: 'ingredient_search'
     get '/users/my_page' => 'users#show'
     delete '/shopping_lists/destroy_all' => 'shopping_lists#destroy_all'
+    get '/users/withdraw' => 'users#withdraw'
+    patch '/users/withdraw_update' => 'users#withdraw_update'
     resources :users, only: [:show, :edit, :update]
     resources :post_recipes, only: [:index, :new, :create, :show, :edit, :update, :destroy] do
       resource :favorites, only: [:create, :destroy]
