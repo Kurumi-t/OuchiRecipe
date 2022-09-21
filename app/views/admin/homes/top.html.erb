@@ -1,47 +1,33 @@
 <div class="container">
-  <h2>食材一覧・追加</h2>
   <div class="row pt-3">
-    <%= form_with model: @food, url: admin_foods_path, method: :POST, local: true do |f| %>
-      <div class="col-2 field">
-        <%= f.label :食材名 %><br>
-        <%= f.text_field :food_name, placeholder: 'キャベツ', class: "mx-5" %>
-      </div>
-      <div class="col-2 field">
-        <%= f.label :ジャンル %><br>
-        <%= f.select :genre, Food.genres.keys.map { |k| [I18n.t("enums.food.genre.#{k}"), k]},{},{class:"form-control form-control-sm text-center"} %>
-      </div>
-      <div class="col-2 field">
-        <%= f.label :単位 %><br>
-        <%= f.text_field :unit, placeholder: '個', class: "mx-5" %>
-      </div>
-      <div class="col-2 field">
-        <%= f.label :１単位あたりの重さ %><br>
-        約<%= f.number_field :weight_per_unit, class: "mx-5", min: 1, max: 1000 %>g
-      </div>
-      <div class="actions">
-        <%= f.submit '追加する', class:"btn btn-success font-weight-bold px-4" %>
-      </div>
-    <% end %>
-  </div>
-  <div class="row pt-3">
-
-    <table class="col-8 mt-3 table border-bottom">
-      <thead class="bg-light">
-        <tr>
-          <th class="col-3">食材名</th>
-          <th class="text-center">単位</th>
-          <th class="text-center">１単位あたりの重さ</th>
-        </tr>
-      </thead>
-      <tbody class="table-borderless">
-        <% @foods.each do |food| %>
+    <div class="col-8 mx-auto">
+      <h4 class="text-center mb-3">ユーザー一覧</h4>
+      <table class="col-10 mt-3 table border-bottom">
+        <thead class="table-borderless text-center">
           <tr>
-            <td class="align-middle"><%= food.food_name %></td>
-            <td class="align-middle text-center"><%= food.unit %></td>
-            <td class="align-middle text-center">約<%= food.weight_per_unit.to_s(:delimited) %>g</td>
+            <th>ID</th>
+            <th>ユーザー名</th>
+            <th>メールアドレス</th>
+            <th>ステータス</th>
           </tr>
+        </thead>
+        <% @users.each do |user| %>
+        <tbody class="table-borderless text-center">
+          <tr>
+            <td><%= user.id %></td>
+            <td><%= link_to(admin_user_path(user.id), class: "text-dark") do %><%= user.name %><% end %></td>
+            <td><%= user.email %></td>
+            <td class="align-middle text_left">
+              <% if user.is_deleted == false %>
+                <b class="text-success">有効</b>
+              <% else %>
+                <b class="text-black-50">退会</b>
+              <% end %>
+            </td>
+          </tr>
+        </tbody>
         <% end %>
-      </tbody>
-    </table>
+      </table>
+    </div>
   </div>
 </div>

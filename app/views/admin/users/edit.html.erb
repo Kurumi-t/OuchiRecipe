@@ -1,2 +1,34 @@
-<h1>Admin::Users#edit</h1>
-<p>Find me in app/views/admin/users/edit.html.erb</p>
+<div class="container">
+  <div class="row pt-3">
+    <div class="col-8 mx-auto">
+      <h4 class="text-center mb-3"><%= @user.name %>さんのユーザー情報編集</h4>
+      <%= form_with model: @user, local: true do |f| %>
+        <table class="table table-borderless table-sm">
+          <tbody>
+            <tr>
+              <td>会員ID</td>
+              <td><%= @user.id %></td>
+            </tr>
+            <tr>
+              <td>ユーザー名</td>
+              <td class="col-3"><%= f.text_field :name, class: "form-control border-dark" %></td>
+            <tr>
+              <td>メールアドレス</td>
+              <td class="col-6"><%= f.email_field :email, autofocus: true, autocomplete: "email", class: "form-control border-dark" %></td>
+            </tr>
+            <tr>
+              <td>ステータス</td>
+              <td>
+                <%= f.radio_button :is_deleted, false %>
+                <%= f.label :is_deleted, "有効", {value: :false, style: "display: inline-block;", class: "mr-4"} %>
+                <%= f.radio_button :is_deleted, true %>
+                <%= f.label :is_deleted, "退会", {value: :true, style: "display: inline-block;"} %>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+        <div class="text_center"><%= f.submit "変更を保存する", data: { confirm: "【確認】本当に変更（退会）してもよろしいですか？" }, class:"btn btn-success btn-lg px-4" %></div>
+      <% end %>
+    </div>
+  </div>
+</div>
