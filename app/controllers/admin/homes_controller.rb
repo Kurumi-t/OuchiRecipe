@@ -1,5 +1,5 @@
 class Admin::HomesController < ApplicationController
   def top
-    @foods = Food.all
+    @users = User.all
   end
 end
