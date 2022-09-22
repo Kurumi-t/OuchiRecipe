@@ -1,6 +1,6 @@
 class Admin::UsersController < ApplicationController
   def show
-    @user = User.page(params[:page])
+    @user = User.find(params[:id])
   end
 
   def edit
