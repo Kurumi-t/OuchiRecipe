@@ -1,7 +1,7 @@
 <div class="container">
   <div class="row pt-3">
-    <div class="col-6">
-      <%= image_tag @post_recipe.get_recipe_image(400,400) %>
+    <div class="col-6 ">
+      <%= image_tag @post_recipe.get_recipe_image(480,480), class:"rounded" %>
     </div>
     <div class="col-6">
       <p><span class="h4 mr-2"><%= @post_recipe.title %></span>
@@ -15,7 +15,7 @@
           <% end %>
         <% end %>
       </p>
-      <p><%= image_tag @post_recipe.user.get_profile_image(30,30) %><%= @post_recipe.user.name %></p>
+      <p><%= image_tag @post_recipe.user.get_profile_image(35,35),class:"rounded-circle" %><%= @post_recipe.user.name %></p>
       <div>
         <%= link_to "買い物リストへ追加", shopping_lists_path, class: "btn btn-outline-light text-dark mx-4" %>
       </div>
@@ -40,7 +40,7 @@
         <tbody class="table-borderless">
           <tr>
             <td class="align-middle text_left"><%= link_to ingredient.food_name, ingredient_search_path(ingredient.food_name) %></td>
-            <td class="align-middle text_right"><%= rounded_decimel(ingredient.amount) %><%= ingredient.unit %><%= ingredient.other_amount %></td>
+            <td class="align-middle text_right"><%= ingredient.other_amount %><%= rounded_decimel(ingredient.amount) %><%= ingredient.unit %></td>
           </tr>
         </tbody>
         <% end %>
