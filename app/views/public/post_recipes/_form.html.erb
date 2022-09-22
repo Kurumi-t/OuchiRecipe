@@ -1,7 +1,7 @@
 <%= form_with model: @post_recipe, local: true do |f| %>
   <div class="row pt-3">
     <div class="col-8 mx-auto field">
-      <h6>料理の写真をのせる<%= f.file_field :image, accept: "image/*" %></h6>
+      <h6>料理の写真をのせる<%= f.file_field :recipe_image, accept: "image/*" %></h6>
       <h6>レシピのタイトル（20文字まで）</h6>
       <%= f.text_field :title, maxlength: '20', placeholder: 'ハンバーグ', class: "col-6 form-control" %>
       <div class="row pt-5 mb-3">
