@@ -13,10 +13,10 @@ Rails.application.routes.draw do
   namespace :admin do
     get '/' => 'homes#top'
     resources :foods, only: [:index, :create, :edit, :update, :destroy]
-    resources :users, only: [:show, :edit, :update]
-    resources :post_recipes, only: [:index, :show, :destroy] do
+    resources :users, only: [:show, :edit, :update] do
       resources :post_comments, only: [:index, :destroy]
     end
+    resources :post_recipes, only: [:index, :show, :destroy]
   end
   scope module: :public do
     get 'search' => 'searches#search'
