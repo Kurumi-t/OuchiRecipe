@@ -6,18 +6,18 @@
         <table class="table table-borderless table-sm">
           <tbody>
             <tr>
-              <td>会員ID</td>
-              <td><%= @user.id %></td>
+              <td class="text-right pr-5">会員ID</td>
+              <td class="pl-3"><%= @user.id %></td>
             </tr>
             <tr>
-              <td>ユーザー名</td>
+              <td class="text-right pr-5">ユーザー名</td>
               <td class="col-3"><%= f.text_field :name, class: "form-control border-dark" %></td>
             <tr>
-              <td>メールアドレス</td>
+              <td class="text-right pr-5">メールアドレス</td>
               <td class="col-6"><%= f.email_field :email, autofocus: true, autocomplete: "email", class: "form-control border-dark" %></td>
             </tr>
             <tr>
-              <td>ステータス</td>
+              <td class="text-right pr-5">ステータス</td>
               <td>
                 <%= f.radio_button :is_deleted, false %>
                 <%= f.label :is_deleted, "有効", {value: :false, style: "display: inline-block;", class: "mr-4"} %>
@@ -27,7 +27,7 @@
             </tr>
           </tbody>
         </table>
-        <div class="text_center"><%= f.submit "変更を保存する", data: { confirm: "【確認】本当に変更（退会）してもよろしいですか？" }, class:"btn btn-success btn-lg px-4" %></div>
+        <div class="row"><%= f.submit "変更を保存する", data: { confirm: "【確認】本当に変更（退会）してもよろしいですか？" }, class:"btn btn-success px-4 mx-auto" %></div>
       <% end %>
     </div>
   </div>
