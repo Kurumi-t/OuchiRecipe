@@ -1,12 +1,12 @@
- ja:
-    enums:
-      food:
-        genre:
-          vegetable: "野菜"
-          meat: "肉"
-          seafood: "魚介"
-          staple_food_and_flour: "主食・粉"
-          eggs_and_milk_and_beans: "卵・乳・豆"
-          fruit_and_dessert: "フルーツ・デザート"
-          seasoning: "調味料"
-          others: "その他"
+ja:
+  enums:
+    fridge:
+      genre:
+        vegetable: "野菜"
+        meat: "肉"
+        seafood: "魚介"
+        staple_food_and_flour: "主食・粉"
+        eggs_and_milk_and_beans: "卵・乳・豆"
+        fruit_and_dessert: "フルーツ・デザート"
+        seasoning: "調味料"
+        others: "その他"
