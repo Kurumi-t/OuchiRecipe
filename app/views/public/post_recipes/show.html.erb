@@ -5,20 +5,26 @@
     </div>
     <div class="col-6">
       <p><span class="h4 mr-2"><%= @post_recipe.title %></span>
-        <% if @post_recipe.favorited_by?(current_user) %>
-          <%= link_to post_recipe_favorites_path(@post_recipe), method: :delete do %>
-            ♥<%= @post_recipe.favorites.count %>
+        <% if user_signed_in? %>
+          <% if @post_recipe.favorited_by?(current_user) %>
+            <%= link_to post_recipe_favorites_path(@post_recipe), method: :delete do %>
+              ♥<%= @post_recipe.favorites.count %>
+            <% end %>
+          <% else %>
+            <%= link_to post_recipe_favorites_path(@post_recipe), method: :post do %>
+              ♡<%= @post_recipe.favorites.count %> いいね
+            <% end %>
           <% end %>
         <% else %>
-          <%= link_to post_recipe_favorites_path(@post_recipe), method: :post do %>
-            ♡<%= @post_recipe.favorites.count %> いいね
-          <% end %>
+          ♥<%= @post_recipe.favorites.count %>
         <% end %>
       </p>
       <p><%= image_tag @post_recipe.user.get_profile_image(35,35),class:"rounded-circle" %><%= @post_recipe.user.name %></p>
-      <div>
-        <%= link_to "買い物リストへ追加", shopping_lists_path, class: "btn btn-outline-light text-dark mx-4" %>
-      </div>
+      <% if user_signed_in? %>
+        <div>
+          <%= link_to "買い物リストへ追加", shopping_lists_path, class: "btn btn-outline-light text-dark mx-4" %>
+        </div>
+      <% end %>
       <div>
         <%= link_to "コメントへ", post_recipe_post_comments_path(@post_recipe), class: "btn btn-outline-light text-dark mx-4" %>
       </div>
