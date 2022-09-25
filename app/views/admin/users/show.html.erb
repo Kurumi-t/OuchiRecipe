@@ -1,28 +1,29 @@
 <div class="container">
-  <h4 class="text-center mb-3"><%= @user.name %>さんのユーザー情報詳細</h4>
-  <div class="col-4 mx-auto">
-  <div class="row pt-3">
-    <div class="col-6 mb-2">ID</div>
-    <div class="col-6"><%= @user.id %></div>
-    <div class="col-6 mb-2">ユーザー名</div>
-    <div class="col-6"><%= @user.name %></div>
-    <div class="col-6 mb-2">メールアドレス</div>
-    <div class="col-6"><%= @user.email %></div>
-    <div class="col-6 mb-2">ステータス</div>
-    <div class="col-6">
-      <% if @user.is_deleted == false %>
-        <b class="text-success">有効</b>
-      <% else %>
-        <b class="text-black-50">退会</b>
-      <% end %>
+  <div class="row mx-auto pt-3">
+    <div class="col-5 mx-auto">
+    <h4 class="text-center mb-3"><%= @user.name %>さんのユーザー情報詳細</h4>
+      <div class="row pt-3">
+        <div class="col-6 mb-2">ID</div>
+        <div class="col-6"><%= @user.id %></div>
+        <div class="col-6 mb-2">ユーザー名</div>
+        <div class="col-6"><%= @user.name %></div>
+        <div class="col-6 mb-2">メールアドレス</div>
+        <div class="col-6"><%= @user.email %></div>
+        <div class="col-6 mb-2">ステータス</div>
+        <div class="col-6">
+          <% if @user.is_deleted == false %>
+            <b class="text-success">有効</b>
+          <% else %>
+            <b class="text-black-50">退会</b>
+          <% end %>
+        </div>
+        <%= link_to("編集する", edit_admin_user_path(@user.id), class: "btn btn-success px-4 mx-auto mt-3") %>
+        <%= link_to(admin_user_post_comment_path(@user.id), class: "btn btn-info px-4 mx-auto mt-3") do %><%= @user.name %>さんのコメント一覧を見る<% end %>
+      </div>
     </div>
-  </div>
-  </div>
-  <div class="row pt-3">
-    <%= link_to("編集する", edit_admin_user_path(@user.id), class: "btn btn-success px-4 mx-auto") %>
-  </div>
-  <div class="row pt-3 mx-auto">
-    <div class="col-6 text-right"><%= link_to(admin_post_recipes_path, class: "btn btn-primary px-4") do %><%= @user.name %>さんのレシピ一覧を見る<% end %></div>
-    <div class="col-6"><%= link_to(admin_user_post_comments_path(@user.id), class: "btn btn-info px-4") do %><%= @user.name %>さんのコメント一覧を見る<% end %></div>
+    <div class="col-7 mx-auto">
+      <h4 class="text-center mb-3"><%= @user.name %>さんのレシピ</h4>
+      <%= render 'public/post_recipes/post_recipes' %>
+    </div>
   </div>
 </div>
