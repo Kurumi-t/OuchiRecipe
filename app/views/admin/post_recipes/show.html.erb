@@ -1,2 +1,56 @@
-<h1>Admin::PostRecipes#show</h1>
-<p>Find me in app/views/admin/post_recipes/show.html.erb</p>
+<div class="container">
+  <div class="row">
+    <div class="col-6 ">
+      <%= image_tag @post_recipe.get_recipe_image(480,480), class:"rounded" %>
+    </div>
+    <div class="col-6">
+      <p><span class="h4 mr-2"><%= @post_recipe.title %></span>
+        ♥<%= @post_recipe.favorites.count %>
+      </p>
+      <p>
+        <%= link_to(admin_user_path(@post_recipe.user.id), class: "text-dark") do %>
+          <%= image_tag @post_recipe.user.get_profile_image(35,35),class:"rounded-circle" %><%= @post_recipe.user.name %>
+        <% end %>
+      </p>
+      <div class="pt-2">
+        <%= link_to "コメントへ", admin_post_recipe_post_comments_path(@post_recipe), class: "btn btn-outline-light text-dark mx-4" %>
+      </div>
+      <div class="pt-2">
+        <%= link_to "レシピを削除する", admin_post_recipe_path(@post_recipe), method: :delete, data: { confirm: "【確認】本当にこのレシピを削除してもよろしいですか？" }, class: "btn btn-danger btn-outline-light mx-4" %>
+      </div>
+    </div>
+  </div>
+  <div class="row pt-3">
+    <div class="col-6">
+      <p>材料(<%= @post_recipe.serving %>)</p>
+      <table class="col-10 mt-3 table border-bottom">
+        <% @ingredients.each do |ingredient| %>
+        <tbody class="table-borderless">
+          <tr>
+            <td class="align-middle text_left"><%= link_to ingredient.food_name, ingredient_search_path(ingredient.food_name) %></td>
+            <td class="align-middle text_right"><%= ingredient.other_amount %><%= rounded_decimel(ingredient.amount) %><%= ingredient.unit %></td>
+          </tr>
+        </tbody>
+        <% end %>
+      </table>
+    </div>
+    <div class="col-6">
+      <p>作り方</p>
+      <table class="col-10 mt-3 table border-bottom">
+        <% @making_recipes.each do |making_recipe| %>
+        <tbody class="table-borderless">
+          <tr>
+            <td class="align-middle text_left"><%= making_recipe.recipe %></td>
+          </tr>
+        </tbody>
+        <% end %>
+      </table>
+    </div>
+  </div>
+  <div class="row pt-3 pb-3">
+    <div class="col-10">
+      <h5>コツ・おすすめ・ひとこと</h5>
+      <p><%= @post_recipe.advice %></p>
+    </div>
+  </div>
+</div>
