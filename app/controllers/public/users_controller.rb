@@ -21,10 +21,13 @@ class Public::UsersController < ApplicationController
 
   def withdraw_update
     @user = current_user
-    @user.usspdate(is_deleted: true)
-    reset_session
-    flash[:notice] = "退会しました"
-    redirect_to root_path
+    if @user.update(is_deleted: true)
+      reset_session
+      flash[:notice] = "退会しました"
+      redirect_to root_path
+    else
+      renter :withdraw
+    end
   end
 
   private
