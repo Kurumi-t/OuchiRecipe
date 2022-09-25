@@ -1,0 +1,19 @@
+<div class="row pt-3">
+  <table class="col-9 mx-auto table border-bottom">
+    <tbody class="table-borderless">
+    <% @post_recipes.each do |post_recipe| %>
+      <tr>
+        <td class="col-3">
+          <%= link_to(post_recipe_path(post_recipe.id), class: "text-dark") do %>
+            <%= image_tag post_recipe.get_recipe_image(200,100), class:"rounded" %>
+          <% end %>
+        </td>
+        <td class="col-9">
+          <%= link_to(post_recipe_path(post_recipe.id), class: "text-dark mb-3") do %><%= post_recipe.title %><% end %><br>
+          <%= image_tag post_recipe.user.get_profile_image(35,35),class:"rounded-circle" %><%= post_recipe.user.name %>
+        </td>
+      </tr>
+    <% end %>
+    </tbody>
+  </table>
+</div>
