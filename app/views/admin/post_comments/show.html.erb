@@ -2,9 +2,9 @@
   <div class="row pt-3">
     <div class="col-8 mx-auto">
       <h4 class="text-center mb-3">
-      <%= link_to(admin_post_recipe_path(@post_recipe), class: "text-dark") do %>
-        <%= @post_recipe.title %>
-      <% end %>のコメント　<%= @post_comment_count %>件
+        <%= link_to(admin_user_path(@user.id), class: "text-dark") do %>
+          <%= @user.name %>
+        <% end %>のコメント　<%= @post_comment_count %>件
       </h4>
       <% if @post_comment_count == 0 %>
         <p>コメントはまだありません。</p>
@@ -19,11 +19,11 @@
               <tr>
                 <td class="col-2"><%= post_comment.created_at.strftime('%Y/%m/%d') %></td>
                 <td>
-                  <%= link_to(admin_user_path(post_comment.user.id), class: "text-dark") do %>
-                    <%= image_tag post_comment.user.get_profile_image(30,30), class:"rounded-circle" %><%= post_comment.user.name %>
+                  <%= link_to(admin_post_recipe_path(post_comment.post_recipe.id), class: "text-dark") do %>
+                    <%= post_comment.post_recipe.title %>
                   <% end %>
                 </td>
-                <td class="col-3 text-right"><%= link_to("削除する", admin_post_recipe_post_comment_path(post_comment.post_recipe, post_comment), method: :delete, data: { confirm: "【確認】本当にこのコメントを削除してもよろしいですか？" }, class: "btn btn-danger font-weight-bold px-4 mx-1") %></td>
+                <td class="col-5 text-right"><%= link_to("このレシピのコメント一覧へ", admin_post_recipe_post_comments_path(post_comment.post_recipe, post_comment), class: "btn btn-info font-weight-bold px-4 mx-1") %></td>
               </tr>
             </tbody>
           </table>
