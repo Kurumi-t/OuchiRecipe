@@ -11,21 +11,43 @@
     </div>
   </div>
   <% end %>
-  <div class="row pt-3">
-    <table class="col-8 mx-auto mt-3 table borderless">
-      <tbody class="border-bottom">
-      <% @fridges.each do |fridge| %>
-        <tr>
-        <%= form_with model: @fridge, url: fridge_path(fridge.id), method: :PATCH, local: true do |f| %>
-          <td class="col-3 align-bottom"><%= fridge.food_name %></td>
-          <td class="col-1 align-bottom"><%= rounded_decimel(fridge.amount) %><%= fridge.unit %></td>
-          <td class="col-2"><%= f.number_field :amount, step: "0.1", min: 0, max: 2000, class: "form-control" %></td>
-          <td class="col-1 align-bottom"><%= fridge.unit %></td>
-          <td class="col-2"><%= f.submit '変更', class:"btn btn-info font-weight-bold px-2 mr-2" %><%= link_to("削除", fridge_path(fridge.id), method: :delete, class: "btn btn-danger font-weight-bold px-2") %></td>
-        <% end %>
-        </tr>
-      <% end %>
-      </tbody>
-    </table>
+  <div class="row pt-3">  <!--タブ部分-->
+    <ul class="tab-list list-unstyled">
+      <li class="tab tab-active">野菜</li>
+      <li class="tab">肉</li>
+      <li class="tab">魚介</li>
+      <li class="tab">主食・粉</li>
+      <li class="tab">卵・乳・豆</li>
+      <li class="tab">フルーツ・デザート</li>
+      <li class="tab">調味料</li>
+      <li class="tab">その他</li>
+    </ul>
+    <div class="tabbox-contents"> <!--タブで選択された要素部分-->
+      <div class="tabbox box-show">
+        <%= render 'public/fridges/fridges_form', fridges: @vegetable_fridges %>
+      </div>
+      <div class="tabbox">
+        <%= render 'public/fridges/fridges_form', fridges: @meat_fridges %>
+      </div>
+      <div class="tabbox">
+        <%= render 'public/fridges/fridges_form', fridges: @seafood_fridges %>
+      </div>
+      <div class="tabbox">
+        <%= render 'public/fridges/fridges_form', fridges: @staple_food_and_flour_fridges %>
+      </div>
+      <div class="tabbox">
+        <%= render 'public/fridges/fridges_form', fridges: @eggs_and_milk_and_beans_fridges %>
+      </div>
+      <div class="tabbox">
+        <%= render 'public/fridges/fridges_form', fridges: @fruit_and_dessert_fridges %>
+      </div>
+      <div class="tabbox">
+        <%= render 'public/fridges/fridges_form', fridges: @seasoning_fridges %>
+      </div>
+      <div class="tabbox">
+        <%= render 'public/fridges/fridges_form', fridges: @others_fridges %>
+      </div>
+    </div>
   </div>
 </div>
+<%= javascript_pack_tag 'tab' %>

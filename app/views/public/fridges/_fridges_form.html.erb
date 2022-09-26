@@ -1,0 +1,15 @@
+<table class="col-8 mx-auto mt-3 table borderless">
+  <tbody class="border-bottom">
+  <% @fridges.each do |fridge| %>
+    <tr>
+    <%= form_with model: @fridge, url: fridge_path(fridge.id), method: :PATCH, local: true do |f| %>
+      <td class="col-3 align-bottom"><%= fridge.food_name %></td>
+      <td class="col-1 align-bottom"><%= rounded_decimel(fridge.amount) %><%= fridge.unit %></td>
+      <td class="col-2"><%= f.number_field :amount, step: "0.1", min: 0, max: 2000, class: "form-control" %></td>
+      <td class="col-1 align-bottom"><%= fridge.unit %></td>
+      <td class="col-2"><%= f.submit '変更', class:"btn btn-info font-weight-bold px-2 mr-2" %><%= link_to("削除", fridge_path(fridge.id), method: :delete, class: "btn btn-danger font-weight-bold px-2") %></td>
+    <% end %>
+    </tr>
+  <% end %>
+  </tbody>
+</table>
