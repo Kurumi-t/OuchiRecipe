@@ -1,23 +1,8 @@
 <div class="container">
-  <h3>検索したレシピ</h3>
-  <div class="row pt-3">
-    <table class="col-8 mt-3 table border-bottom">
-      <tbody class="table-borderless">
-      <% @post_recipes.each do |post_recipe| %>
-        <tr>
-          <td class="align-middle">
-            <%= link_to(post_recipe_path(post_recipe.id), class: "text-dark") do %>
-              <%= image_tag post_recipe.get_recipe_image(200,100) %>
-            <% end %>
-          </td>
-          <td>
-            <%= link_to(post_recipe_path(post_recipe.id), class: "text-dark") do %><%= post_recipe.title %><% end %><br>
-            <%= post_recipe.user.name %>
-          </td>
-          <td class="align-middle text-center">♡<%= post_recipe.favorites.count %></td>
-        </tr>
-      <% end %>
-      </tbody>
-    </table>
-  </div>
+  <h5 class="text-center"><span class="mr-3"><%= @word %></span>を使ったレシピ検索結果</h5>
+  <% if @post_recipes == [] %>
+    <h6 class="text-center mt-3">検索されたレシピは見つかりません。</h6>
+  <% else %>
+    <%= render 'public/post_recipes/post_recipes' %>
+  <% end %>
 </div>
