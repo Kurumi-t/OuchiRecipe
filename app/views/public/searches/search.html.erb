@@ -1,10 +1,8 @@
 <div class="container">
-  <h3>検索したレシピ</h3>
-  <div class="row pt-3">
-    <div class="col-10 field">
-      <% @post_recipes.each do |post_recipe| %>
-        <%= post_recipe.title %>
-      <% end %>
-    </div>
-  </div>
+  <h5 class="text-center"><span class="mr-3"><%= @word %></span>レシピ検索結果</h5>
+  <% if @post_recipes == [] %>
+    <h6 class="text-center mt-3">検索されたレシピは見つかりません。</h6>
+  <% else %>
+    <%= render 'public/post_recipes/post_recipes' %>
+  <% end %>
 </div>
