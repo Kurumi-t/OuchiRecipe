@@ -20,22 +20,22 @@
         <% end %>
       </p>
       <p><%= image_tag @post_recipe.user.get_profile_image(35,35),class:"rounded-circle" %><%= @post_recipe.user.name %></p>
+      <div>
+        <%= link_to "コメントへ", post_recipe_post_comments_path(@post_recipe), class: "btn btn-info mx-4 mb-2" %>
+      </div>
       <% if user_signed_in? %>
         <div>
-          <%= link_to "買い物リストへ追加", shopping_lists_path, class: "btn btn-outline-light text-dark mx-4" %>
+          <%= link_to "買い物リストへ追加", shopping_lists_path, class: "btn btn-outline-info mx-4 mb-2" %>
         </div>
       <% end %>
+      <% if @post_recipe.user == current_user %>
       <div>
-        <%= link_to "コメントへ", post_recipe_post_comments_path(@post_recipe), class: "btn btn-outline-light text-dark mx-4" %>
-      </div>
-    <% if @post_recipe.user == current_user %>
-      <div>
-        <%= link_to "編集する", edit_post_recipe_path, class: "btn btn-outline-light text-dark mx-4" %>
+        <%= link_to "編集する", edit_post_recipe_path, class: "btn btn-success mx-4 mb-2" %>
       </div>
       <div>
-        <%= link_to "削除する", post_recipe_path(@post_recipe), method: :delete, class: "btn btn-danger btn-outline-light text-dark mx-4" %>
+        <%= link_to "削除する", post_recipe_path(@post_recipe), method: :delete, data: { confirm: "【確認】本当に削除してもよろしいですか？" }, class: "btn btn-danger mx-4" %>
       </div>
-    <% end %>
+      <% end %>
     </div>
   </div>
   <div class="row pt-3">
@@ -45,7 +45,7 @@
         <% @ingredients.each do |ingredient| %>
         <tbody class="table-borderless">
           <tr>
-            <td class="align-middle text_left"><%= link_to ingredient.food_name, ingredient_search_path(ingredient.food_name) %></td>
+            <td class="align-middle text_left"><%= ingredient.food_name %></td>
             <td class="align-middle text_right"><%= ingredient.other_amount %><%= rounded_decimel(ingredient.amount) %><%= ingredient.unit %></td>
           </tr>
         </tbody>
