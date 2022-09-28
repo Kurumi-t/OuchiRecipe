@@ -1,7 +1,7 @@
 class Public::PostRecipesController < ApplicationController
   def index
     @user = current_user
-    favorites= Favorite.where(user_id: @user.id).pluck(:post_recipe_id)
+    favorites = Favorite.where(user_id: @user.id).pluck(:post_recipe_id)
     @post_recipes = PostRecipe.find(favorites)
   end
 
