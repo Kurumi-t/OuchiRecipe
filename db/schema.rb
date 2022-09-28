@@ -106,10 +106,10 @@ ActiveRecord::Schema.define(version: 2022_09_06_115732) do
 
   create_table "shopping_lists", force: :cascade do |t|
     t.integer "ingredient_id"
-    t.integer "fridge_id"
-    t.integer "user_id"
-    t.string "food_name"
-    t.decimal "amount"
+    t.integer "user_id", null: false
+    t.string "food_name", null: false
+    t.decimal "amount", null: false
+    t.string "unit", null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
   end
