@@ -17,6 +17,9 @@
           <a class="navbar-brand mt-5" href="/">
             <span class="border border-dark  text-dark h1 px-5">OuchiRecipe</span>
           </a>
+          <div class="mx-5">
+            おうちにある食材からレシピを検索する
+          </div>
           <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
           </button>
@@ -51,10 +54,9 @@
           </div>
         </nav>
         <div class="text-center">
-          <p>おうちにある食材からレシピを検索する</p>
             <%= form_with url: search_path, method: :get, local: :true, class:"col-3 d-flex ml-auto" do |f| %>
-              <%= f.text_field :word, placeholder: "ハンバーグ", class: "form-control me-2 justif" %>
-              <%= f.submit "検索" %>
+              <%= f.text_field :word, placeholder: "ハンバーグ", class: "form-control mr-2" %>
+              <%= f.submit "検索", class:"btn btn-secondary" %>
             <% end %>
         </div>
       </div>
