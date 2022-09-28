@@ -46,7 +46,7 @@
             <% @vegetable_fridges.each do |vegetable_fridge| %>
               <tr>
               <%= form_with model: @fridge, url: fridge_path(vegetable_fridge.id), method: :PATCH, local: true do |f| %>
-                <td class="col-3 align-bottom"><%= vegetable_fridge.food_name %></td>
+                <td class="col-3 align-bottom"><%= link_to vegetable_fridge.food_name, ingredient_search_path(vegetable_fridge.food_name) %></td>
                 <td class="col-1 align-bottom"><%= rounded_decimel(vegetable_fridge.amount) %><%= vegetable_fridge.unit %></td>
                 <td class="col-2"><%= f.number_field :amount, step: "0.1", min: 0, max: 2000, class: "form-control" %></td>
                 <td class="col-1 align-bottom"><%= vegetable_fridge.unit %></td>
@@ -63,7 +63,7 @@
             <% @meat_fridges.each do |meat_fridge| %>
               <tr>
               <%= form_with model: @fridge, url: fridge_path(meat_fridge.id), method: :PATCH, local: true do |f| %>
-                <td class="col-3 align-bottom"><%= meat_fridge.food_name %></td>
+                <td class="col-3 align-bottom"><%= link_to meat_fridge.food_name, ingredient_search_path(meat_fridge.food_name) %></td>
                 <td class="col-1 align-bottom"><%= rounded_decimel(meat_fridge.amount) %><%= meat_fridge.unit %></td>
                 <td class="col-2"><%= f.number_field :amount, step: "0.1", min: 0, max: 2000, class: "form-control" %></td>
                 <td class="col-1 align-bottom"><%= meat_fridge.unit %></td>
@@ -80,7 +80,7 @@
             <% @seafood_fridges.each do |seafood_fridge| %>
               <tr>
               <%= form_with model: @fridge, url: fridge_path(seafood_fridge.id), method: :PATCH, local: true do |f| %>
-                <td class="col-3 align-bottom"><%= seafood_fridge.food_name %></td>
+                <td class="col-3 align-bottom"><%= link_to seafood_fridge.food_name, ingredient_search_path(seafood_fridge.food_name) %></td>
                 <td class="col-1 align-bottom"><%= rounded_decimel(seafood_fridge.amount) %><%= seafood_fridge.unit %></td>
                 <td class="col-2"><%= f.number_field :amount, step: "0.1", min: 0, max: 2000, class: "form-control" %></td>
                 <td class="col-1 align-bottom"><%= seafood_fridge.unit %></td>
@@ -97,7 +97,7 @@
             <% @staple_food_and_flour_fridges.each do |staple_food_and_flour_fridge| %>
               <tr>
               <%= form_with model: @fridge, url: fridge_path(staple_food_and_flour_fridge.id), method: :PATCH, local: true do |f| %>
-                <td class="col-3 align-bottom"><%= staple_food_and_flour_fridge.food_name %></td>
+                <td class="col-3 align-bottom"><%= link_to staple_food_and_flour_fridge.food_name, ingredient_search_path(staple_food_and_flour_fridge.food_name) %></td>
                 <td class="col-1 align-bottom"><%= rounded_decimel(staple_food_and_flour_fridge.amount) %><%= staple_food_and_flour_fridge.unit %></td>
                 <td class="col-2"><%= f.number_field :amount, step: "0.1", min: 0, max: 2000, class: "form-control" %></td>
                 <td class="col-1 align-bottom"><%= staple_food_and_flour_fridge.unit %></td>
@@ -114,7 +114,7 @@
             <% @eggs_and_milk_and_beans_fridges.each do |eggs_and_milk_and_beans_fridge| %>
               <tr>
               <%= form_with model: @fridge, url: fridge_path(eggs_and_milk_and_beans_fridge.id), method: :PATCH, local: true do |f| %>
-                <td class="col-3 align-bottom"><%= eggs_and_milk_and_beans_fridge.food_name %></td>
+                <td class="col-3 align-bottom"><%= link_to eggs_and_milk_and_beans_fridge.food_name, ingredient_search_path(eggs_and_milk_and_beans_fridge.food_name) %></td>
                 <td class="col-1 align-bottom"><%= rounded_decimel(eggs_and_milk_and_beans_fridge.amount) %><%= eggs_and_milk_and_beans_fridge.unit %></td>
                 <td class="col-2"><%= f.number_field :amount, step: "0.1", min: 0, max: 2000, class: "form-control" %></td>
                 <td class="col-1 align-bottom"><%= eggs_and_milk_and_beans_fridge.unit %></td>
@@ -131,7 +131,7 @@
             <% @fruit_and_dessert_fridges.each do |fruit_and_dessert_fridge| %>
               <tr>
               <%= form_with model: @fridge, url: fridge_path(fruit_and_dessert_fridge.id), method: :PATCH, local: true do |f| %>
-                <td class="col-3 align-bottom"><%= fruit_and_dessert_fridge.food_name %></td>
+                <td class="col-3 align-bottom"><%= link_to fruit_and_dessert_fridge.food_name, ingredient_search_path(fruit_and_dessert_fridge.food_name) %></td>
                 <td class="col-1 align-bottom"><%= rounded_decimel(fruit_and_dessert_fridge.amount) %><%= fruit_and_dessert_fridge.unit %></td>
                 <td class="col-2"><%= f.number_field :amount, step: "0.1", min: 0, max: 2000, class: "form-control" %></td>
                 <td class="col-1 align-bottom"><%= fruit_and_dessert_fridge.unit %></td>
@@ -148,7 +148,7 @@
             <% @seasoning_fridges.each do |seasoning_fridge| %>
               <tr>
               <%= form_with model: @fridge, url: fridge_path(seasoning_fridge.id), method: :PATCH, local: true do |f| %>
-                <td class="col-3 align-bottom"><%= seasoning_fridge.food_name %></td>
+                <td class="col-3 align-bottom"><%= link_to seasoning_fridge.food_name, ingredient_search_path(seasoning_fridge.food_name) %></td>
                 <td class="col-1 align-bottom"><%= rounded_decimel(seasoning_fridge.amount) %><%= seasoning_fridge.unit %></td>
                 <td class="col-2"><%= f.number_field :amount, step: "0.1", min: 0, max: 2000, class: "form-control" %></td>
                 <td class="col-1 align-bottom"><%= seasoning_fridge.unit %></td>
@@ -165,7 +165,7 @@
             <% @others_fridges.each do |others_fridge| %>
               <tr>
               <%= form_with model: @fridge, url: fridge_path(others_fridge.id), method: :PATCH, local: true do |f| %>
-                <td class="col-3 align-bottom"><%= others_fridge.food_name %></td>
+                <td class="col-3 align-bottom"><%= link_to others_fridge.food_name, ingredient_search_path(others_fridge.food_name) %></td>
                 <td class="col-1 align-bottom"><%= rounded_decimel(others_fridge.amount) %><%= others_fridge.unit %></td>
                 <td class="col-2"><%= f.number_field :amount, step: "0.1", min: 0, max: 2000, class: "form-control" %></td>
                 <td class="col-1 align-bottom"><%= others_fridge.unit %></td>
