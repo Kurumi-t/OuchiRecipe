@@ -23,10 +23,11 @@ Rails.application.routes.draw do
   scope module: :public do
     get 'search' => 'searches#search'
     get 'ingredient_search/:ingredient_name' => 'searches#ingredient_search',as: 'ingredient_search'
-    get '/users/my_page' => 'users#show'
-    delete '/shopping_lists/destroy_all' => 'shopping_lists#destroy_all'
-    get '/users/withdraw' => 'users#withdraw'
-    patch '/users/withdraw_update' => 'users#withdraw_update'
+    get 'my_page' => 'users#show'
+    delete 'shopping_lists/destroy_all' => 'shopping_lists#destroy_all'
+    get 'withdraw' => 'users#withdraw'
+    patch 'withdraw_update' => 'users#withdraw_update'
+    post 'fridge_create' => 'fridges#fridge_create'
     resources :users, only: [:show, :edit, :update]
     resources :post_recipes, only: [:index, :new, :create, :show, :edit, :update, :destroy] do
       resource :favorites, only: [:create, :destroy]

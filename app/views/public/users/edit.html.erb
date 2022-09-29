@@ -18,9 +18,9 @@
       <div class="row text-center pt-3">
         <div class="col-12">
           <%= f.submit '変更する', class:"btn btn-success mr-5 font-weight-bold px-4" %>
-          <%= link_to("退会する", users_withdraw_path, class: "btn btn-danger font-weight-bold px-4") %>
+          <%= link_to("退会する", withdraw_path, class: "btn btn-danger font-weight-bold px-4") %>
         </div>
-        <div class="col-12 pt-4"><%= link_to(users_my_page_path, class: "btn btn-danger font-weight-bold px-4") do %><%= @user.name %>さんのマイページへ戻る<% end %></div>
+        <div class="col-12 pt-4"><%= link_to(my_page_path, class: "btn btn-danger font-weight-bold px-4") do %><%= @user.name %>さんのマイページへ戻る<% end %></div>
       </div>
     <% end %>
     </div>
