@@ -37,6 +37,11 @@ class Public::ShoppingListsController < ApplicationController
     end
   end
 
+  def destroy_all
+    shopping_lists.destroy_all
+    redirect_to fridges_path(current_user.id)
+  end
+
   private
   def shopping_list_params
     params.require(:shopping_list).permit(:food_name, :amount, :unit)
