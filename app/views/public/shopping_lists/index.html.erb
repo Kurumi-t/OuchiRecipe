@@ -16,6 +16,11 @@
         <tbody class="border-bottom">
         <% @shopping_lists.each do |shopping_list| %>
           <tr>
+          <%= form_with model: @fridge, url: fridge_create_path, method: :POST, local: true do |f| %>
+            <td class="col-3 align-bottom"><%= f.select :genre, Fridge.genres.keys.map { |k| [I18n.t("enums.fridge.genre.#{k}"), k]},{},{class:"form-control form-control-sm text-center"} %></td>
+            <td class="align-bottom"><%= f.check_box :fridge %></td>
+            <%= f.submit '冷蔵庫に入れる', class:"btn btn-info font-weight-bold px-2 mr-2" %>
+          <% end %>
           <%= form_with model: @shopping_list, url: shopping_list_path(shopping_list.id), method: :PATCH, local: true do |f| %>
             <td class="col-3 align-bottom"><%= shopping_list.food_name %></td>
             <td class="col-1 align-bottom"><%= rounded_decimel(shopping_list.amount) %><%= shopping_list.unit %></td>
@@ -27,6 +32,9 @@
         <% end %>
         </tbody>
       </table>
+    </div>
+    <div class="col-6 text-right">
+      <%= link_to("買い物リストを全て削除する", shopping_lists_destroy_all_path, method: :delete, class: "btn btn-danger px-3") %>
     </div>
   </div>
 </div>
