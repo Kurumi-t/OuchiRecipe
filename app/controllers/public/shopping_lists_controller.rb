@@ -38,8 +38,8 @@ class Public::ShoppingListsController < ApplicationController
   end
 
   def destroy_all
-    shopping_lists.destroy_all
-    redirect_to fridges_path(current_user.id)
+    current_user.shopping_lists.destroy_all
+    redirect_to shopping_lists_path(current_user.id)
   end
 
   private
