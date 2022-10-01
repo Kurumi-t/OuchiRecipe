@@ -23,11 +23,6 @@
       <div>
         <%= link_to "コメントへ", post_recipe_post_comments_path(@post_recipe), class: "btn btn-info mx-4 mb-2" %>
       </div>
-      <% if user_signed_in? %>
-        <div>
-          <%= link_to "買い物リストへ追加", shopping_lists_path, class: "btn btn-outline-info mx-4 mb-2" %>
-        </div>
-      <% end %>
       <% if @post_recipe.user == current_user %>
       <div>
         <%= link_to "レシピを編集する", edit_post_recipe_path, class: "btn btn-success mx-4 mb-2" %>
@@ -42,14 +37,22 @@
     <div class="col-6">
       <p>材料(<%= @post_recipe.serving %>)</p>
       <table class="col-10 mt-3 table border-bottom">
-        <% @ingredients.each do |ingredient| %>
+      <% @ingredients.each do |ingredient| %>
+        <%= form_with model: @shopping_list, url: shopping_lists_path, method: :POST, local: true do |f| %>
+          <%= f.hidden_field :food_name, value: ingredient.food_name %>
+          <%= f.hidden_field :amount, value: ingredient.amount %>
+          <%= f.hidden_field :unit, value: ingredient.unit %>
         <tbody class="table-borderless">
           <tr>
             <td class="align-middle text_left"><%= ingredient.food_name %></td>
             <td class="align-middle text_right"><%= ingredient.other_amount %><%= rounded_decimel(ingredient.amount) %><%= ingredient.unit %></td>
+          <% if user_signed_in? %>
+            <td class="align-middle text_right"><%= f.submit '買い物リストに追加', class: "btn btn-info font-weight-bold mx-4 mb-2" %></td>
+          <% end %>
           </tr>
         </tbody>
         <% end %>
+      <% end %>
       </table>
     </div>
     <div class="col-6">
