@@ -34,15 +34,11 @@ class Public::FridgesController < ApplicationController
   end
 
   def fridge_create
+    @user = current_user
     @fridge = Fridge.new(fridge_params)
-    shopping_lists = current_user.shopping_lists.all
-    shopping_lists.each do |shopping_lists|
-      shopping_list.food_name = @fridge.food_name
-      shopping_list.amount = @fridge.amount
-      shopping_list.unit = @fridge.unit
-    end
+    @fridge.user_id = @user.id
     if @fridge.save
-      shopping_lists.destroy_all
+      # shopping_list.destroy
       redirect_to fridges_path(@user.id)
     else
       @fridges = Fridge.all
