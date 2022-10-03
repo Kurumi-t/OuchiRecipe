@@ -1,0 +1,20 @@
+<div class="container">
+  <h4 class="text-center mt-3"><%= @user.name %>さんの下書きレシピ</h4>
+  <div class="row text-center mt-3">
+    <div class="col-10 mx-auto">
+    <% if @post_recipe_count == 0 %>
+      <p>下書きしたレシピはありません。</p>
+    <% else %>
+      <% @post_recipes.each do |post_recipe| %>
+      <div class="col-8">
+        <%= link_to(edit_post_recipe_path(post_recipe.id), class: "text-dark") do %>
+          <%= image_tag post_recipe.get_recipe_image(180,100) %>
+          <p><%= post_recipe.title %></p>
+        <% end %>
+      </div>
+      <% end %>
+      <%= paginate @post_recipes %>
+    <% end %>
+    </div>
+  </div>
+</div>
