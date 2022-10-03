@@ -1,8 +1,14 @@
 class Public::UsersController < ApplicationController
   def show
     @user = current_user
-    @post_recipes = @user.post_recipes.page(params[:page]).per(8)
-    @post_recipe_count = @user.post_recipes.all.count
+    @post_recipes = PostRecipe.where("user_id = ? and is_draft = ?", @user.id, false).page(params[:page]).per(10)
+    @post_recipe_count = @post_recipes.all.count
+  end
+
+  def confirm
+    @user = current_user
+    @post_recipes = PostRecipe.where("user_id = ? and is_draft = ?", @user.id, true).page(params[:page]).per(10)
+    @post_recipe_count = @post_recipes.all.count
   end
 
   def edit
