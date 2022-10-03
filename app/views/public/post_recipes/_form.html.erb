@@ -1,45 +1,38 @@
-<%= form_with model: @post_recipe, local: true do |f| %>
-  <div class="row pt-3">
-    <div class="col-8 mx-auto field">
-      <h6>料理の写真をのせる<%= f.file_field :recipe_image, accept: "image/*" %></h6>
-      <h6>レシピのタイトル（20文字まで）</h6>
-      <%= f.text_field :title, maxlength: '20', placeholder: 'ハンバーグ', class: "col-6 form-control" %>
-      <div class="row pt-5 mb-3">
-        <div class="h5">材料</div>
-        <div class="col-3"><%= f.text_field :serving, placeholder: '2人分', class: "form-control" %></div>
-      </div>
-      <%= f.fields_for :ingredients do |ff| %>
-        <%= render 'public/post_recipes/ingredient_fields', f: ff %>
-      <% end %>
-      <div id="detail-association-insertion-point"></div>  <!-- ここに食材フォームを追加 -->
-      <div class="row form-group pt-3">
-        <div class="nested-fields mx-auto">
-          <div class="mx-auto">
-            <%= link_to_add_association "+食材を追加", f, :ingredients, class: "btn btn-secondary btn-block",
-              data: {association_insertion_node: '#detail-association-insertion-point', association_insertion_method: 'append'}%>
-          </div>
-        </div>
-      </div>
-      <div class="row pt-3">
-        <h5>作り方</h5>
-      </div>
-      <%= f.fields_for :making_recipes do |fff| %>
-        <%= render 'public/post_recipes/making_recipe_fields', f: fff %>
-      <% end %>
-      <div id="detail-association-insertion-point2"></div>  <!-- ここに作り方フォームを追加 -->
-      <div class="row form-group pt-3">
-        <div class="nested-fields mx-auto">
-          <div class="mx-auto">
-            <%= link_to_add_association "+作り方を追加", f, :making_recipes, class: "btn btn-secondary btn-block",
-              data: {association_insertion_node: '#detail-association-insertion-point2', association_insertion_method: 'append'}%>
-          </div>
-        </div>
-      </div>
-      <div class="row pt-3">
-        <h5>コツ・おすすめ・ひとこと</h5>
-        <%= f.text_area :advice, class: "col-12 form-control border-dark" %>
-        <div class="mx-auto mt-3"><%= f.submit 'レシピを投稿する', class:"btn btn-success font-weight-bold px-4" %></div>
-      </div>
+<h6>料理の写真をのせる<%= f.file_field :recipe_image, accept: "image/*" %></h6>
+<h6>レシピのタイトル（20文字まで）</h6>
+<%= f.text_field :title, maxlength: '20', placeholder: 'ハンバーグ', class: "col-6 form-control" %>
+<div class="row pt-5 mb-3">
+  <div class="h5">材料</div>
+  <div class="col-3"><%= f.text_field :serving, placeholder: '2人分', class: "form-control" %></div>
+</div>
+<%= f.fields_for :ingredients do |ff| %>
+  <%= render 'public/post_recipes/ingredient_fields', f: ff %>
+<% end %>
+<div id="detail-association-insertion-point"></div>  <!-- ここに食材フォームを追加 -->
+<div class="row form-group pt-3">
+  <div class="nested-fields mx-auto">
+    <div class="mx-auto">
+      <%= link_to_add_association "+食材を追加", f, :ingredients, class: "btn btn-secondary btn-block",
+        data: {association_insertion_node: '#detail-association-insertion-point', association_insertion_method: 'append'}%>
     </div>
   </div>
+</div>
+<div class="row pt-3">
+  <h5>作り方</h5>
+</div>
+<%= f.fields_for :making_recipes do |fff| %>
+  <%= render 'public/post_recipes/making_recipe_fields', f: fff %>
 <% end %>
+<div id="detail-association-insertion-point2"></div>  <!-- ここに作り方フォームを追加 -->
+<div class="row form-group pt-3">
+  <div class="nested-fields mx-auto">
+    <div class="mx-auto">
+      <%= link_to_add_association "+作り方を追加", f, :making_recipes, class: "btn btn-secondary btn-block",
+        data: {association_insertion_node: '#detail-association-insertion-point2', association_insertion_method: 'append'}%>
+    </div>
+  </div>
+</div>
+<div class="row pt-3">
+  <h5>コツ・おすすめ・ひとこと</h5>
+  <%= f.text_area :advice, class: "col-12 form-control border-dark" %>
+</div>

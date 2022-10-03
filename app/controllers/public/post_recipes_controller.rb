@@ -14,10 +14,18 @@ class Public::PostRecipesController < ApplicationController
   def create
     @post_recipe = PostRecipe.new(post_recipe_params)
     @post_recipe.user_id = current_user.id
-    if @post_recipe.save
-      redirect_to post_recipe_path(@post_recipe.id)
+    if params[:post]
+      if @post_recipe.save
+        redirect_to post_recipe_path(@post_recipe.id), notice: "レシピを投稿しました！"
+      else
+        render :new, alert: "登録できませんでした。お手数ですが、入力内容をご確認のうえ再度お試しください"
+      end
     else
-      render :new
+      if @post_recipe.update(is_draft: true)
+        redirect_to confirm_path, notice: "レシピを下書き保存しました！"
+      else
+        render :new, alert: "登録できませんでした。お手数ですが、入力内容をご確認のうえ再度お試しください"
+      end
     end
   end
 
@@ -34,17 +42,34 @@ class Public::PostRecipesController < ApplicationController
 
   def update
     @post_recipe = PostRecipe.find(params[:id])
-    if @post_recipe.update(post_recipe_params)
-      redirect_to post_recipe_path(@post_recipe.id)
+    if params[:publicize_draft]
+      @post_recipe.update(is_draft: "false")
+      if @post_recipe.save
+        redirect_to post_recipe_path(@post_recipe.id), notice: "下書きのレシピを公開しました！"
+      else
+        @post_recipe.is_draft = true
+        render :edit, alert: "レシピを公開できませんでした。お手数ですが、入力内容をご確認のうえ再度お試しください"
+      end
+    elsif params[:update_post]
+      @post_recipe.attributes = post_recipe_params
+      if @post_recipe.save(context: :publicize)
+        redirect_to post_recipe_path(@post_recipe.id), notice: "レシピを更新しました！"
+      else
+        render :edit, alert: "レシピを更新できませんでした。お手数ですが、入力内容をご確認のうえ再度お試しください"
+      end
     else
-      render :edit
+      if @post_recipe.update(post_recipe_params)
+        redirect_to confirm_path, notice: "下書きレシピを更新しました！"
+      else
+        render :edit, alert: "更新できませんでした。お手数ですが、入力内容をご確認のうえ再度お試しください"
+      end
     end
   end
 
   def destroy
     @post_recipe = PostRecipe.find(params[:id])
     if @post_recipe.destroy
-      redirect_to users_my_page_path(current_user.id)
+      redirect_to my_page_path(current_user.id)
     else
       render :show
     end

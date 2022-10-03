@@ -7,10 +7,16 @@ class PostRecipe < ApplicationRecord
   accepts_nested_attributes_for :ingredients, :making_recipes, allow_destroy: true, reject_if: :all_blank
 
   has_one_attached :recipe_image
-  validates :title, presence: true
+  validates :title, length: { maximum: 14 }, presence: true
   validates :serving, presence: true
-  validates :advice, presence: true
+  validates :advice, length: { maximum: 80 }, presence: true
   validates :is_draft, presence: true
+  with_options presence: true, on: :publicize do
+    validates :serving
+    validates :is_draft
+  end
+  validates :title, length: { maximum: 14 }, on: :publicize
+  validates :advice, length: { maximum: 80 }, on: :publicize
 
   def get_recipe_image(width, height)
     unless recipe_image.attached?

@@ -1,4 +1,21 @@
 <div class="container">
   <h4 class="text-center mb-3">レシピを書き直す</h4>
-  <%= render 'public/post_recipes/form' %>
+  <%= form_with model: @post_recipe, local: true do |f| %>
+  <div class="row pt-3">
+    <div class="col-8 mx-auto field">
+      <%= render 'public/post_recipes/form', f: f %>
+      <div class="row pt-3">
+        <div class="mx-auto mt-3">
+          <% if @post_recipe.is_draft == true %>
+            <%= f.submit "レシピを公開", :name => 'publicize_draft', class:'mr-5 btn btn-sm btn-warning' %>
+            <%= f.submit "下書きを更新", :name => 'update_draft', class:'mr-5 btn btn-sm btn-outline-secondary' %>
+            <%= link_to "レシピを削除する", post_recipe_path(@post_recipe), method: :delete, data: { confirm: "【確認】本当に削除してもよろしいですか？" }, class: "btn btn-danger mx-4" %>
+          <% else %>
+            <%= f.submit "レシピを更新", :name => 'update_post', class:'btn btn-sm btn-warning text-light' %>
+          <% end %>
+        </div>
+      </div>
+    </div>
+  </div>
+<% end %>
 </div>
