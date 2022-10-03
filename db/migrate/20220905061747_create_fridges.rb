@@ -6,6 +6,7 @@ class CreateFridges < ActiveRecord::Migration[6.1]
       t.integer :genre, null: false
       t.decimal :amount, null: false
       t.string :unit, null: false
+      t.integer :shopping_list_id
       t.timestamps
     end
   end

@@ -65,6 +65,7 @@ ActiveRecord::Schema.define(version: 2022_09_06_115732) do
     t.integer "genre", null: false
     t.decimal "amount", null: false
     t.string "unit", null: false
+    t.integer "shopping_list_id"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
   end
