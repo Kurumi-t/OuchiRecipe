@@ -3,6 +3,7 @@ class Public::ShoppingListsController < ApplicationController
     @user = current_user
     @shopping_lists = ShoppingList.all
     @shopping_list = ShoppingList.new
+    @fridge = Fridge.new
   end
 
   def create
