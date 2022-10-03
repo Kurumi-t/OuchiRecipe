@@ -15,6 +15,7 @@ class Public::PostRecipesController < ApplicationController
     @post_recipe = PostRecipe.new(post_recipe_params)
     @post_recipe.user_id = current_user.id
     if params[:post]
+      @post_recipe.is_draft = false
       if @post_recipe.save
         redirect_to post_recipe_path(@post_recipe.id), notice: "レシピを投稿しました！"
       else
@@ -43,7 +44,7 @@ class Public::PostRecipesController < ApplicationController
   def update
     @post_recipe = PostRecipe.find(params[:id])
     if params[:publicize_draft]
-      @post_recipe.update(is_draft: "false")
+        @post_recipe.is_draft = false
       if @post_recipe.save
         redirect_to post_recipe_path(@post_recipe.id), notice: "下書きのレシピを公開しました！"
       else

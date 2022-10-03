@@ -10,10 +10,8 @@ class PostRecipe < ApplicationRecord
   validates :title, length: { maximum: 14 }, presence: true
   validates :serving, presence: true
   validates :advice, length: { maximum: 80 }, presence: true
-  validates :is_draft, presence: true
   with_options presence: true, on: :publicize do
     validates :serving
-    validates :is_draft
   end
   validates :title, length: { maximum: 14 }, on: :publicize
   validates :advice, length: { maximum: 80 }, on: :publicize
