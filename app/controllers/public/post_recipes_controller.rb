@@ -25,6 +25,7 @@ class Public::PostRecipesController < ApplicationController
     @post_recipe = PostRecipe.find(params[:id])
     @ingredients = @post_recipe.ingredients
     @making_recipes = @post_recipe.making_recipes
+    @shopping_list = ShoppingList.new
   end
 
   def edit
