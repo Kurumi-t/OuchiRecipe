@@ -38,7 +38,8 @@ class Public::FridgesController < ApplicationController
     @fridge = Fridge.new(fridge_params)
     @fridge.user_id = @user.id
     if @fridge.save
-      # shopping_list.destroy
+      @shopping_list = ShoppingList.find_by(id: params[:fridge][:shopping_list_id])
+      @shopping_list.destroy
       redirect_to fridges_path(@user.id)
     else
       @fridges = Fridge.all
@@ -76,6 +77,6 @@ class Public::FridgesController < ApplicationController
 
   private
   def fridge_params
-    params.require(:fridge).permit(:food_name, :genre, :amount, :unit)
+    params.require(:fridge).permit(:food_name, :genre, :amount, :unit, :shopping_list_id)
   end
 end
