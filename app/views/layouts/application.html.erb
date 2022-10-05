@@ -11,55 +11,52 @@
     <%= javascript_pack_tag 'application' %>
 
   <body>
-    <header>
-      <div class="container">
-        <nav class="navbar navbar-expand-lg sticky-top">
-          <a class="navbar-brand mt-5" href="/">
-            <span class="border border-dark  text-dark h1 px-5">OuchiRecipe</span>
-          </a>
-          <div class="mx-5">
-            おうちにある食材からレシピを検索する
-          </div>
-          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
+    <header class="sticky-top fixed-top bg-white">
+      <nav class="navbar navbar-expand-lg navbar-light">
+        <div class="container">
+          <button class="navbar-toggler mb-2 mx-2" type="button" data-toggle="collapse" data-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
           </button>
-          <div class="navbar-collapse collapse" id="navbarNavDropdown">
-            <ul class="navbar-nav ml-auto">
-            <% if user_signed_in? %>
-              <li class="nav-item">
-                <%= link_to "レシピを書く", new_post_recipe_path, class: "nav-link btn btn-outline-light text-dark mx-4" %>
-              </li>
-              <li class="nav-item">
-                <%= link_to "ログアウト", destroy_user_session_path, method: :delete, class: "nav-link btn btn-outline-light text-dark mx-4" %>
-              </li>
-            <% elsif admin_signed_in? %>
-              <li class="nav-item">
-                <%= link_to "レシピ一覧", admin_post_recipes_path, class: "nav-link btn btn-outline-light text-dark mx-4" %>
-              </li>
-              <li class="nav-item">
-                <%= link_to "ユーザー一覧", admin_path, class: "nav-link btn btn-outline-light text-dark mx-4" %>
-              </li>
-              <li class="nav-item">
-                <%= link_to "ログアウト", destroy_admin_session_path, method: :delete, class: "nav-link btn btn-outline-light text-dark mx-4" %>
-              </li>
-            <% else %>
-              <li class="nav-item">
-                <%= link_to "ユーザー登録", new_user_registration_path, class: "nav-link btn btn-outline-light text-dark mx-4" %>
-              </li>
-              <li class="nav-item">
-                <%= link_to "ログイン", new_user_session_path, class: "nav-link btn btn-outline-light text-dark mx-4" %>
-              </li>
-            <% end %>
-            </ul>
+          <a class="navbar-brand pr-5" href="/"><%= image_tag 'OuchiRecipe-logo.jpg', alt: 'OuchiRecipe', size: '150x75' %></a>
+          <div class="row">
+            <div class="navbar-collapse collapse mb-2" id="navbarNavDropdown">
+              <ul class="navbar-nav ml-auto">
+              <% if user_signed_in? %>
+                <li class="nav-item">
+                  <%= link_to "レシピを書く", new_post_recipe_path, class: "nav-link btn btn-outline-success text-dark mx-2" %>
+                </li>
+                <li class="nav-item">
+                  <%= link_to "ログアウト", destroy_user_session_path, method: :delete, class: "nav-link btn btn-outline-danger text-dark mx-2" %>
+                </li>
+              <% elsif admin_signed_in? %>
+                <li class="nav-item">
+                  <%= link_to "レシピ一覧", admin_post_recipes_path, class: "nav-link btn btn-outline-primary text-dark mx-2" %>
+                </li>
+                <li class="nav-item">
+                  <%= link_to "ユーザー一覧", admin_path, class: "nav-link btn btn-outline-info text-dark mx-2" %>
+                </li>
+                <li class="nav-item">
+                  <%= link_to "ログアウト", destroy_admin_session_path, method: :delete, class: "nav-link btn btn-outline-danger text-dark mx-2" %>
+                </li>
+              <% else %>
+                <li class="nav-item">
+                  <%= link_to "ユーザー登録", new_user_registration_path, class: "nav-link btn btn-outline-info text-dark mx-2" %>
+                </li>
+                <li class="nav-item">
+                  <%= link_to "ログイン", new_user_session_path, class: "nav-link btn btn-outline-success text-dark mx-2" %>
+                </li>
+              <% end %>
+              </ul>
+            </div>
+            <div class="col-12">
+              <%= form_with url: search_path, method: :get, local: :true, class:"d-flex ml-auto" do |f| %>
+                <%= f.text_field :word, placeholder: "ハンバーグ", class: "form-control mr-2" %>
+                <%= f.submit "検索", class:"btn btn-outline-secondary" %>
+              <% end %>
+            </div>
           </div>
-        </nav>
-        <div class="text-center">
-            <%= form_with url: search_path, method: :get, local: :true, class:"col-3 d-flex ml-auto" do |f| %>
-              <%= f.text_field :word, placeholder: "ハンバーグ", class: "form-control mr-2" %>
-              <%= f.submit "検索", class:"btn btn-secondary" %>
-            <% end %>
         </div>
-      </div>
+      </nav>
     </header>
     <main>
       <div class="text-center">
@@ -68,8 +65,8 @@
       </div>
       <%= yield %>
     </main>
-    <footer>
-      <div class="container">
+    <footer class="fixed-bottom bg-white">
+      <div class="container mb-2">
       <% if user_signed_in? %>
         <nav class="navbar navbar-expand-lg sticky-top">
           <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
@@ -95,10 +92,10 @@
       <% elsif admin_signed_in? %>
       <% else %>
         <div class="text-center">
-          ユーザー登録すると冷蔵庫からレシピ検索ができるようになります。<br>
-          またレシピを投稿したりお気に入りレシピを保存することができます。
+          ユーザー登録するとレシピを投稿したり、お気に入りレシピを保存することができます。
         </div>
       <% end %>
+      </div>
     </footer>
   </body>
 </html>
