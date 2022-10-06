@@ -1,29 +1,27 @@
 <div class="container">
-  <h2>新規登録</h2>
-  <div class="row mt-5">
-    <%= form_with model: @user, url: user_registration_path do |f| %>
+  <h3 class="text-center">ユーザー新規登録</h3>
+  <%= form_with model: @user, url: user_registration_path do |f| %>
     <%= render "devise/shared/error_messages", resource: resource %>
-    <div class="field">
-      <%= f.label :ユーザー名 %><br>
-      <%= f.text_field :name, placeholder: 'Ouchi-user', class: "form-control border-dark" %>
+    <div class="row mt-4">
+      <div class="col-5 col-md-5 text-right">ユーザー名</div>
+      <div class="col-7 col-md-4"><%= f.text_field :name, placeholder: 'Ouchi-user', class: "form-control border-dark" %></div>
     </div>
-    <div class="field">
-      <%= f.label :メールアドレス %><br>
-      <%= f.email_field :email, autofocus: true, autocomplete: "email", placeholder: 'sample@example.com', class: "form-control border-dark" %>
+    <div class="row mt-4">
+      <div class="col-5 col-md-5 text-right">メールアドレス</div>
+      <div class="col-7 col-md-4"><%= f.email_field :email, autofocus: true, autocomplete: "email", placeholder: 'sample@example.com', class: "form-control border-dark" %></div>
     </div>
-    <div class="field">
-      <%= f.label :パスワード %><br>
-      <%= f.password_field :password, autocomplete: "current-password", class: "form-control border-dark" %>
+    <div class="row mt-4">
+      <div class="col-5 col-md-5 text-right">パスワード</div>
+      <div class="col-7 col-md-4"><%= f.password_field :password, autocomplete: "current-password", class: "form-control border-dark" %></div>
     </div>
-    <div class="actions">
-      <%= f.submit "新規登録", class:"btn btn-info btn-block" %>
+    <div class="row actions mt-4">
+      <%= f.submit "新規登録", class:"col-4 col-md-2 btn btn-info mx-auto" %>
     </div>
-    <% end %>
-    <div class="col-md-8 offset-md-1 mt-5">
-      <p>
-        <span class="bg-light">登録がお済みの方は</span>
-        <u><%= link_to "こちら", new_user_session_path %></u>
-      </p>
-    </div>
+  <% end %>
+  <div class="row mt-4">
+    <p class="mx-auto">
+      <span>登録がお済みの方は</span>
+      <%= link_to "こちら", new_user_session_path %>
+    </p>
   </div>
 </div>

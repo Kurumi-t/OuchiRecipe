@@ -1,19 +1,17 @@
 <div class="container">
-  <h2>管理者ログイン</h2>
-  <div class="row mt-5">
-    <%= form_with model: @admin, url: admin_session_path do |f| %>
+  <h3 class="text-center">管理者ログイン</h3>
+  <%= form_with model: @admin, url: admin_session_path do |f| %>
     <%= render "devise/shared/error_messages", resource: resource %>
-    <div class="field">
-      <%= f.label :メールアドレス %><br>
-      <%= f.email_field :email, autofocus: true, autocomplete: "email", placeholder: 'sample@example.com', class: "form-control border-dark" %>
+    <div class="row mt-4">
+      <div class="col-5 col-md-5 text-right">メールアドレス</div>
+      <div class="col-7 col-md-4"><%= f.email_field :email, autofocus: true, autocomplete: "email", placeholder: 'sample@example.com', class: "form-control border-dark" %></div>
     </div>
-    <div class="field">
-      <%= f.label :パスワード %><br>
-      <%= f.password_field :password, autocomplete: "current-password", class: "form-control border-dark" %>
+    <div class="row mt-4">
+      <div class="col-5 text-right">パスワード</div>
+      <div class="col-7 col-md-4"><%= f.password_field :password, autocomplete: "current-password", class: "form-control border-dark" %></div>
     </div>
-    <div class="actions">
-      <%= f.submit "ログイン", class:"btn btn-info btn-block" %>
+    <div class="row actions mt-4">
+      <%= f.submit "ログイン", class:"col-4 col-md-2 btn btn-info mx-auto" %>
     </div>
-    <% end %>
-  </div>
+  <% end %>
 </div>
