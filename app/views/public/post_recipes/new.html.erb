@@ -1,16 +1,16 @@
-<div class="container">
+<div class="container mb-5">
   <h4 class="text-center mb-3">レシピを書く</h4>
   <%= form_with model: @post_recipe, local: true do |f| %>
-  <div class="row pt-3">
-    <div class="col-8 mx-auto field">
-      <%= render 'public/post_recipes/form', f: f %>
-      <div class="row pt-3">
-        <div class="mx-auto mt-3">
-          <%= f.submit "レシピを公開", :name => 'post', class:'mr-5 btn btn-sm btn-warning' %>
-          <%= f.submit "下書きに保存", :name => 'draft', class:'mr-5 btn btn-sm btn-outline-secondary' %>
+    <div class="row pt-3">
+      <div class="col-8 mx-auto field">
+        <%= render 'public/post_recipes/form', f: f %>
+        <div class="row pt-3 pb-5">
+          <div class="mx-auto mt-3">
+            <%= f.submit "レシピを公開", :name => 'post', class:'mr-5 btn btn-success' %>
+            <%= f.submit "下書きに保存", :name => 'draft', class:'mr-5 btn btn-outline-secondary' %>
+          </div>
         </div>
       </div>
     </div>
-  </div>
-<% end %>
+  <% end %>
 </div>

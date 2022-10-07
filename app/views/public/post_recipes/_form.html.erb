@@ -1,38 +1,45 @@
-<h6>料理の写真をのせる<%= f.file_field :recipe_image, accept: "image/*" %></h6>
-<h6>レシピのタイトル（20文字まで）</h6>
-<%= f.text_field :title, maxlength: '20', placeholder: 'ハンバーグ', class: "col-6 form-control" %>
-<div class="row pt-5 mb-3">
-  <div class="h5">材料</div>
+<div class="row">
+  <div class="col-12 h5">
+    料理の写真をのせる
+    <label>
+      <span class="btn btn-outline-secondary">写真を選択<%= f.file_field :recipe_image, accept: "image/*", style: "display:none" %></span>
+    </label>
+  </div>
+  <div class="col-12 h5">レシピのタイトル（20文字まで）</div>
+  <div class="col-6 pb-2">
+    <%= f.text_field :title, maxlength: '20', placeholder: 'ハンバーグ', class: "form-control ml-1" %>
+  </div>
+</div>
+<div class="row pt-3 mb-3">
+  <div class="ml-3 h5 pt-2">材料</div>
   <div class="col-3"><%= f.text_field :serving, placeholder: '2人分', class: "form-control" %></div>
 </div>
 <%= f.fields_for :ingredients do |ff| %>
   <%= render 'public/post_recipes/ingredient_fields', f: ff %>
 <% end %>
 <div id="detail-association-insertion-point"></div>  <!-- ここに食材フォームを追加 -->
-<div class="row form-group pt-3">
+<div class="row form-group">
   <div class="nested-fields mx-auto">
     <div class="mx-auto">
-      <%= link_to_add_association "+食材を追加", f, :ingredients, class: "btn btn-secondary btn-block",
+      <%= link_to_add_association "+食材を追加", f, :ingredients, class: "btn btn-outline-secondary btn-block",
         data: {association_insertion_node: '#detail-association-insertion-point', association_insertion_method: 'append'}%>
     </div>
   </div>
 </div>
-<div class="row pt-3">
-  <h5>作り方</h5>
-</div>
+<h5 class="pt-2">作り方</h5>
 <%= f.fields_for :making_recipes do |fff| %>
   <%= render 'public/post_recipes/making_recipe_fields', f: fff %>
 <% end %>
 <div id="detail-association-insertion-point2"></div>  <!-- ここに作り方フォームを追加 -->
-<div class="row form-group pt-3">
+<div class="row form-group">
   <div class="nested-fields mx-auto">
     <div class="mx-auto">
-      <%= link_to_add_association "+作り方を追加", f, :making_recipes, class: "btn btn-secondary btn-block",
+      <%= link_to_add_association "+作り方を追加", f, :making_recipes, class: "btn btn-outline-secondary btn-block",
         data: {association_insertion_node: '#detail-association-insertion-point2', association_insertion_method: 'append'}%>
     </div>
   </div>
 </div>
-<div class="row pt-3">
-  <h5>コツ・おすすめ・ひとこと</h5>
-  <%= f.text_area :advice, class: "col-12 form-control border-dark" %>
+<div class="row pt-2">
+  <div class="col-12 h5">コツ・おすすめ・ひとこと</div>
+  <%= f.text_area :advice, class: "col-12 form-control shadow-sm ml-3", size: "10x2" %>
 </div>
