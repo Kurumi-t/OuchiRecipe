@@ -1,4 +1,5 @@
 class Public::PostRecipesController < ApplicationController
+  before_action :authenticate_user!, except: [:show]
   def index
     @user = current_user
     favorites = Favorite.where(user_id: @user.id).pluck(:post_recipe_id)

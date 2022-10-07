@@ -1,4 +1,5 @@
 class Public::UsersController < ApplicationController
+  before_action :authenticate_user!
   def show
     @user = current_user
     @post_recipes = PostRecipe.where("user_id = ? and is_draft = ?", @user.id, false).page(params[:page]).per(10)

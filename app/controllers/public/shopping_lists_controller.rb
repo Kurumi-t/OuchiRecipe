@@ -1,4 +1,5 @@
 class Public::ShoppingListsController < ApplicationController
+  before_action :authenticate_user!
   def index
     @user = current_user
     @shopping_lists = ShoppingList.all
