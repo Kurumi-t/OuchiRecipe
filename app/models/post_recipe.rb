@@ -27,6 +27,6 @@ class PostRecipe < ApplicationRecord
     favorites.exists?(user_id: user.id)
   end
   def self.search(words)
-    @post_recipe = PostRecipe.where("title LIKE ?", "%#{words}%")
+    @post_recipe = PostRecipe.where("title LIKE ?", "%#{words}%").where(is_draft: false)
   end
 end
