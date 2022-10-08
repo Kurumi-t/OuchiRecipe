@@ -14,7 +14,7 @@ class Public::PostCommentsController < ApplicationController
     if @post_comment.save
       redirect_to post_recipe_post_comments_path(@post_recipe.id)
     else
-      render :new
+      render :index
     end
   end
 
