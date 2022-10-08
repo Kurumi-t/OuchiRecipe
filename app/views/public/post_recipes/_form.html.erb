@@ -12,7 +12,7 @@
 </div>
 <div class="row pt-3 mb-3">
   <div class="ml-3 h5 pt-2">材料</div>
-  <div class="col-3"><%= f.text_field :serving, placeholder: '2人分', class: "form-control" %></div>
+  <div class="col-5 col-sm-3"><%= f.text_field :serving, placeholder: '2人分', class: "form-control" %></div>
 </div>
 <%= f.fields_for :ingredients do |ff| %>
   <%= render 'public/post_recipes/ingredient_fields', f: ff %>
@@ -21,7 +21,7 @@
 <div class="row form-group">
   <div class="nested-fields mx-auto">
     <div class="mx-auto">
-      <%= link_to_add_association "+食材を追加", f, :ingredients, class: "btn btn-outline-secondary btn-block",
+      <%= link_to_add_association "+食材を追加", f, :ingredients, class: "btn btn-secondary btn-block",
         data: {association_insertion_node: '#detail-association-insertion-point', association_insertion_method: 'append'}%>
     </div>
   </div>
@@ -34,12 +34,14 @@
 <div class="row form-group">
   <div class="nested-fields mx-auto">
     <div class="mx-auto">
-      <%= link_to_add_association "+作り方を追加", f, :making_recipes, class: "btn btn-outline-secondary btn-block",
+      <%= link_to_add_association "+作り方を追加", f, :making_recipes, class: "btn btn-secondary btn-block",
         data: {association_insertion_node: '#detail-association-insertion-point2', association_insertion_method: 'append'}%>
     </div>
   </div>
 </div>
 <div class="row pt-2">
   <div class="col-12 h5">コツ・おすすめ・ひとこと</div>
-  <%= f.text_area :advice, class: "col-12 form-control shadow-sm ml-3", size: "10x2" %>
+  <div class="col-12">
+    <%= f.text_area :advice, class: "form-control shadow-sm", size: "10x2" %>
+  </div>
 </div>

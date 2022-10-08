@@ -1,77 +1,92 @@
-<div class="container">
-  <div class="row pt-3">
-    <div class="col-6 ">
-      <%= image_tag @post_recipe.get_recipe_image(480,480), class:"rounded" %>
+<div class="container mb-5">
+  <div class="row">
+    <div class="col-12 col-sm-6 mb-3">
+      <%= image_tag @post_recipe.get_recipe_image(480,480), class:"col-12 rounded" %>
     </div>
-    <div class="col-6">
-      <p><span class="h4 mr-2"><%= @post_recipe.title %></span>
-        <% if user_signed_in? %>
-          <% if @post_recipe.favorited_by?(current_user) %>
-            <%= link_to post_recipe_favorites_path(@post_recipe), method: :delete do %>
-              ♥<%= @post_recipe.favorites.count %> いいね
+    <div class="col-12 col-sm-6">
+      <div class="row">
+        <div class="col-12"><span class="h4 mx-2"><%= @post_recipe.title %></span>
+          <% if user_signed_in? %>
+            <% if @post_recipe.favorited_by?(current_user) %>
+              <%= link_to post_recipe_favorites_path(@post_recipe), method: :delete do %>
+                ♥<%= @post_recipe.favorites.count %> いいね
+              <% end %>
+            <% else %>
+              <%= link_to post_recipe_favorites_path(@post_recipe), method: :post do %>
+                ♡<%= @post_recipe.favorites.count %> いいね
+              <% end %>
             <% end %>
           <% else %>
-            <%= link_to post_recipe_favorites_path(@post_recipe), method: :post do %>
-              ♡<%= @post_recipe.favorites.count %> いいね
-            <% end %>
+            ♥<%= @post_recipe.favorites.count %>
           <% end %>
-        <% else %>
-          ♥<%= @post_recipe.favorites.count %>
+        </div>
+        <div class="col-6 col-sm-12">
+          <%= image_tag @post_recipe.user.get_profile_image(35,35),class:"rounded-circle ml-2" %><%= @post_recipe.user.name %>
+        </div>
+        <div class="col-6 col-sm-12">
+          <%= link_to "コメントへ", post_recipe_post_comments_path(@post_recipe), class: "btn btn-info mt-2 mb-2" %>
+        </div>
+        <% if @post_recipe.user == current_user %>
+            <div class="col-5 offset-1 col-sm-12 offset-md-0">
+              <%= link_to "レシピを編集", edit_post_recipe_path, class: "btn btn-success mb-2" %>
+            </div>
+            <div class="col-5 col-sm-12">
+              <%= link_to "レシピを削除", post_recipe_path(@post_recipe), method: :delete, data: { confirm: "【確認】本当に削除してもよろしいですか？" }, class: "btn btn-danger" %>
+            </div>
+        <% end %>
+      </div>
+    </div>
+  </div>
+  <div class="row pt-3">
+    <div class="col-12 col-sm-6">
+      <p>
+        <span class="h5 mr-3">材料(<%= @post_recipe.serving %>)</span>
+        <% if user_signed_in? %>
+          >>買い物リストへ追加
         <% end %>
       </p>
-      <p><%= image_tag @post_recipe.user.get_profile_image(35,35),class:"rounded-circle" %><%= @post_recipe.user.name %></p>
-      <div>
-        <%= link_to "コメントへ", post_recipe_post_comments_path(@post_recipe), class: "btn btn-info mx-4 mb-2" %>
-      </div>
-      <% if @post_recipe.user == current_user %>
-      <div>
-        <%= link_to "レシピを編集する", edit_post_recipe_path, class: "btn btn-success mx-4 mb-2" %>
-      </div>
-      <div>
-        <%= link_to "レシピを削除する", post_recipe_path(@post_recipe), method: :delete, data: { confirm: "【確認】本当に削除してもよろしいですか？" }, class: "btn btn-danger mx-4" %>
-      </div>
-      <% end %>
-    </div>
-  </div>
-  <div class="row pt-3">
-    <div class="col-6">
-      <p>材料(<%= @post_recipe.serving %>)</p>
-      <table class="col-10 mt-3 table border-bottom">
-      <% @ingredients.each do |ingredient| %>
-        <%= form_with model: @shopping_list, url: shopping_lists_path, method: :POST, local: true do |f| %>
-          <%= f.hidden_field :food_name, value: ingredient.food_name %>
-          <%= f.hidden_field :amount, value: ingredient.amount %>
-          <%= f.hidden_field :unit, value: ingredient.unit %>
+      <table class="col-12 mt-3 table table-sm border-bottom">
         <tbody class="table-borderless">
-          <tr>
-            <td class="align-middle text_left"><%= ingredient.food_name %></td>
-            <td class="align-middle text_right"><%= ingredient.other_amount %><%= rounded_decimel(ingredient.amount) %><%= ingredient.unit %></td>
-          <% if user_signed_in? %>
-            <td class="align-middle text_right"><%= f.submit '買い物リストに追加', class: "btn btn-info font-weight-bold mx-4 mb-2" %></td>
+          <% @ingredients.each do |ingredient| %>
+            <%= form_with model: @shopping_list, url: shopping_lists_path, method: :POST, local: true do |f| %>
+              <%= f.hidden_field :food_name, value: ingredient.food_name %>
+              <%= f.hidden_field :amount, value: ingredient.amount %>
+              <%= f.hidden_field :unit, value: ingredient.unit %>
+              <tr>
+                <td class="col-7 align-middle"><%= ingredient.food_name %></td>
+                <td class="col-5 align-middle">
+                  <%= ingredient.other_amount %><%= rounded_decimel(ingredient.amount) %><%= ingredient.unit %>
+                  <% if user_signed_in? %>
+                    <label>
+                      <span class="btn-outline-info">
+                        >>追加<%= f.submit '追加', style: "display:none" %>
+                      </span>
+                    </label>
+                  <% end %>
+                </td>
+              </tr>
+            <% end %>
           <% end %>
-          </tr>
         </tbody>
-        <% end %>
-      <% end %>
       </table>
     </div>
-    <div class="col-6">
-      <p>作り方</p>
-      <table class="col-10 mt-3 table border-bottom">
-        <% @making_recipes.each do |making_recipe| %>
-        <tbody class="table-borderless">
-          <tr>
-            <td class="align-middle text_left"><%= making_recipe.recipe %></td>
-          </tr>
+    <div class="col-12 col-sm-6">
+      <p class="h5">作り方</p>
+      <table class="col-12 mt-3 table">
+        <tbody class="border-bottom">
+          <% @making_recipes.each do |making_recipe| %>
+            <tr>
+              <td class="align-middle"><%= making_recipe.recipe %></td>
+            </tr>
+          <% end %>
         </tbody>
-        <% end %>
       </table>
     </div>
   </div>
-  <div class="row pt-3">
+  <div class="row pt-3 mb-5">
     <div class="col-10">
       <h5>コツ・おすすめ・ひとこと</h5>
-      <p><%= @post_recipe.advice %></p>
+      <p class="ml-4"><%= @post_recipe.advice %></p>
     </div>
   </div>
 </div>
