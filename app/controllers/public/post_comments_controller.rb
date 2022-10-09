@@ -1,8 +1,9 @@
 class Public::PostCommentsController < ApplicationController
   def index
     @post_recipe = PostRecipe.find(params[:post_recipe_id])
-    @post_comments = @post_recipe.post_comments
-    @post_comment_count = @post_comments.all.count
+    post_comments = @post_recipe.post_comments
+    @post_comments = post_comments.page(params[:page]).per(10)
+    @post_comment_count = post_comments.all.count
     @post_comment = PostComment.new
   end
 
@@ -14,6 +15,9 @@ class Public::PostCommentsController < ApplicationController
     if @post_comment.save
       redirect_to post_recipe_post_comments_path(@post_recipe.id)
     else
+      post_comments = @post_recipe.post_comments
+      @post_comments = post_comments.page(params[:page]).per(10)
+      @post_comment_count = post_comments.all.count
       render :index
     end
   end
