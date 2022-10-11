@@ -46,7 +46,7 @@ class Public::PostRecipesController < ApplicationController
     @post_recipe = PostRecipe.find(params[:id])
     if params[:publicize_draft]
         @post_recipe.is_draft = false
-      if @post_recipe.save
+      if @post_recipe.update(post_recipe_params)
         redirect_to post_recipe_path(@post_recipe.id), notice: "下書きのレシピを公開しました！"
       else
         @post_recipe.is_draft = true
