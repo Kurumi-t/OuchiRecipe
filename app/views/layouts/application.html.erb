@@ -7,9 +7,9 @@
     <%= csp_meta_tag %>
 
     <script src="https://code.jquery.com/jquery-3.6.1.min.js"></script>
+    <script src="https://kit.fontawesome.com/612df887b1.js" crossorigin="anonymous"></script>
     <%= stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track': 'reload' %>
     <%= javascript_pack_tag 'application' %>
-    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.2/css/all.css" integrity="sha384-oS3vJWv+0UjzBfQzYUhtDYW+Pj2yciDJxpsK1OYPAYjqT085Qq/1cq5FLXAZQ7Ay" crossorigin="anonymous">
   </head>
 
   <body>
@@ -68,28 +68,28 @@
       <%= yield %>
     </main>
     <footer class="sticky-bottom fixed-bottom bg-white">
-      <div class="container mb-2">
+      <div class="container mt-2 mb-2">
       <% if user_signed_in? %>
-        <div class="col-12 mx-auto">
-          <div class="row">
-            <div class="col-3 offset-1 text-center">
+        <div class="col-10 col-sm-8 mx-auto">
+          <div class="row mx-auto">
+            <div class="mx-1 mx-auto">
               <%= link_to my_page_path, class: "btn btn-outline-success text-dark" do %>
                 <i class="fa-regular fa-user"></i>
               <% end %>
             </div>
-            <div class="col-2 text-center">
+            <div class="mx-1 mx-auto">
               <%= link_to fridges_path, class: "btn btn-outline-primary text-dark" do %>
-                <i class="fa-regular fa-refrigerator"></i>冷蔵庫
+                <i class="fa-solid fa-door-closed"></i><i class="fa-brands fa-qq"></i>
               <% end %>
             </div>
-            <div class="col-2 text-center">
+            <div class="mx-1 mx-auto">
               <%= link_to post_recipes_path, class: "btn btn-outline-danger text-dark" do %>
-                ♡レシピ
+                <i class="fa-regular fa-heart"></i>
               <% end %>
             </div>
-            <div class="col-3 text-center">
+            <div class="mx-1 mx-auto">
               <%= link_to shopping_lists_path, class: "btn btn-outline-warning text-dark" do %>
-                買い物リスト
+                <i class="fa-solid fa-cart-shopping"></i><i class="fa-solid fa-pen-to-square"></i>
               <% end %>
             </div>
           </div>
