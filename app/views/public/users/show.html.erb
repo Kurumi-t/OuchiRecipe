@@ -1,52 +1,67 @@
 <div class="container mb-5">
   <h4 class="text-center"><%= @user.name %>さんのマイページ</h4>
-  <div class="row pt-4">
-    <div class="col-6 col-sm-3 text-center">
-      <%= link_to fridges_path(@user.id), class: "btn btn-outline-info" do %>
-        <i class="fa-solid fa-door-closed"></i><i class="fa-brands fa-qq"></i>冷蔵庫
-      <% end %>
-      <p>食材の登録</p>
-    </div>
-    <div class="col-6 col-sm-3 text-center">
-      <%= link_to new_post_recipe_path, class: "btn btn-outline-success" do %>
-        <i class="fa-solid fa-pen"></i>レシピを書く
-      <% end %>
-      <p>レシピを投稿</p>
-    </div>
-    <div class="col-6 col-sm-3 text-center">
-      <%= link_to confirm_path, class: "btn btn-outline-secondary" do %>
-        <i class="fa-solid fa-pen-to-square"></i>下書きレシピ
-      <% end %>
-      <p>下書きレシピ一覧</p>
-    </div>
-    <div class="col-6 col-sm-3 text-center">
-      <%= link_to edit_user_path(@user.id), class: "btn btn-outline-success" do %>
-        <i class="fa-solid fa-user-pen"></i>編集
-      <% end %>
-      <p>プロフィール編集</p>
-    </div>
-  </div>
-  <h4 class="text-center mt-3"><%= @user.name %>さんのレシピ<span class="ml-3"><%= @post_recipe_count %>品</span></h4>
-  <div class="row text-center mt-3">
-    <div class="col-12 col-lg-10 mx-auto">
-    <% if @post_recipe_count == 0 %>
-      <p>
-        <%= @user.name %>さんのレシピはまだありません。<br>
-        普段からよく作るレシピなどを書いてみよう！
-      </p>
-    <% else %>
+  <div class="row pt-2">
+    <div class="col-12 col-sm-3 col-lg-2">
       <div class="row text-center">
-        <% @post_recipes.each do |post_recipe| %>
-        <div class="col-6 col-sm-3">
-          <%= link_to(post_recipe_path(post_recipe.id), class: "text-dark") do %>
-            <%= image_tag post_recipe.get_recipe_image(270,150), class:"img-fluid rounded" %>
-            <p><%= post_recipe.title %></p>
+        <div class="col-6 col-sm-12">
+          <%= link_to edit_user_path(@user.id), class: "btn btn-outline-success" do %>
+            <i class="fa-solid fa-user-pen"></i>編集
+          <% end %>
+          <p>プロフィール編集</p>
+        </div>
+        <div class="col-6 col-sm-12">
+          <%= link_to fridges_path(@user.id), class: "btn btn-outline-info" do %>
+            <i class="fa-solid fa-door-closed"></i><i class="fa-brands fa-qq"></i>冷蔵庫
+          <% end %>
+          <p>食材の登録</p>
+        </div>
+        <div class="col-6 col-sm-12">
+          <%= link_to post_recipes_path, class: "btn btn-outline-danger" do %>
+            <i class="fa-regular fa-heart"></i>レシピ
+          <% end %>
+          <p>いいねしたレシピ</p>
+        </div>
+        <div class="col-6 col-sm-12 mb-3">
+          <%= link_to new_post_recipe_path, class: "btn btn-outline-success" do %>
+            <i class="fa-solid fa-pen"></i>レシピを書く
           <% end %>
         </div>
-        <% end %>
+        <div class="col-6 col-sm-12 mb-3">
+          <%= link_to confirm_path, class: "btn btn-outline-secondary" do %>
+            <i class="fa-solid fa-pen-to-square"></i>下書きレシピ
+          <% end %>
+        </div>
+        <div class="col-6 col-sm-12 mb-3 px-0">
+          <%= link_to shopping_lists_path, class: "btn btn-outline-warning text-dark" do %>
+              <i class="fa-solid fa-cart-shopping"></i><i class="fa-solid fa-pen-to-square"></i>買い物リスト
+          <% end %>
+        </div>
       </div>
-      <%= paginate @post_recipes %>
-    <% end %>
+    </div>
+    <div class="col-12 col-sm-8">
+      <h4 class="text-center"><%= @user.name %>さんのレシピ<span class="ml-3"><%= @post_recipe_count %>品</span></h4>
+      <div class="row text-center mt-3">
+        <div class="col-12 col-lg-10 mx-auto">
+          <% if @post_recipe_count == 0 %>
+            <p>
+              <%= @user.name %>さんのレシピはまだありません。<br>
+              普段からよく作るレシピなどを書いてみよう！
+            </p>
+          <% else %>
+            <div class="row text-center">
+              <% @post_recipes.each do |post_recipe| %>
+              <div class="col-6 col-sm-3">
+                <%= link_to(post_recipe_path(post_recipe.id), class: "text-dark") do %>
+                  <%= image_tag post_recipe.get_recipe_image(270,150), class:"img-fluid rounded" %>
+                  <p><%= post_recipe.title %></p>
+                <% end %>
+              </div>
+              <% end %>
+            </div>
+            <%= paginate @post_recipes %>
+          <% end %>
+        </div>
+      </div>
     </div>
   </div>
 </div>
