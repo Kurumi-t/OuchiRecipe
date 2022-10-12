@@ -3,11 +3,21 @@
   <%= form_with model: @fridge, local: true do |f| %>
   <div class="col-12 col-lg-10 mx-auto">
     <div class="row">
-      <div class="col-9 order-4 order-sm-1 col-sm-3 pl-0 mb-3"><%= f.select :genre, Fridge.genres.keys.map { |k| [I18n.t("enums.fridge.genre.#{k}"), k]},{},{class:"form-control form-control text-center"} %></div>
-      <div class="col-6 order-1 order-sm-2 col-sm-4 pl-0 mb-2"><%= f.text_field :food_name, maxlength: '20', placeholder: 'たまねぎ', class: "form-control" %></div>
-      <div class="col-3 order-2 order-sm-3 col-sm-2 pl-0"><%= f.number_field :amount, step: "0.1", min: 0, max: 2000, class: "form-control" %></div>
-      <div class="col-3 order-3 order-sm-4 col-sm-2 pl-0"><%= f.text_field :unit, placeholder: '個、g', class: "form-control" %></div>
-      <div class="col-3 order-last col-sm-1 pl-0"><%= f.submit '追加', class:"btn btn-info font-weight-bold" %></div>
+      <div class="col-9 order-4 order-sm-1 col-sm-3 pl-0 mb-3">
+        <%= f.select :genre, Fridge.genres.keys.map { |k| [I18n.t("enums.fridge.genre.#{k}"), k]},{},{class:"form-control form-control text-center"} %>
+      </div>
+      <div class="col-6 order-1 order-sm-2 col-sm-4 pl-0 mb-2">
+        <%= f.text_field :food_name, maxlength: '20', placeholder: 'たまねぎ', class: "form-control" %>
+      </div>
+      <div class="col-3 order-2 order-sm-3 col-sm-2 pl-0">
+        <%= f.number_field :amount, step: "0.1", min: 0, max: 2000, class: "form-control" %>
+      </div>
+      <div class="col-3 order-3 order-sm-4 col-sm-2 pl-0">
+        <%= f.text_field :unit, placeholder: '個、g', class: "form-control" %>
+      </div>
+      <div class="col-3 order-last col-sm-1 pl-0">
+        <%= f.submit '追加', class:"btn btn-info font-weight-bold" %>
+      </div>
     </div>
   </div>
   <% end %>
