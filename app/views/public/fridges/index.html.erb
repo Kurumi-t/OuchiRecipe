@@ -1,180 +1,252 @@
-<div class="container">
-  <h5 class="text-center mb-3">冷蔵庫（おうちにある食材を追加しよう！）</h5>
+<div class="container mb-5">
+  <h4 class="text-center mb-3">冷蔵庫（おうちにある食材を追加しよう！）</h4>
   <%= form_with model: @fridge, local: true do |f| %>
-  <div class="col-10 mx-auto">
-    <div class="row pt-3">
-      <div class="col-3"><%= f.select :genre, Fridge.genres.keys.map { |k| [I18n.t("enums.fridge.genre.#{k}"), k]},{},{class:"form-control form-control-sm text-center"} %></div>
-      <div class="col-3"><%= f.text_field :food_name, maxlength: '20', placeholder: 'たまねぎ', class: "form-control" %></div>
-      <div class="col-2"><%= f.number_field :amount, step: "0.1", min: 0, max: 2000, class: "form-control" %></div>
-      <div class="col-2"><%= f.text_field :unit, placeholder: '個、g', class: "form-control" %></div>
-      <div class="col-2"><%= f.submit '冷蔵庫に入れる', class:"btn btn-info font-weight-bold px-4" %></div>
+  <div class="col-12 col-lg-10 mx-auto">
+    <div class="row">
+      <div class="col-9 order-4 order-sm-1 col-sm-3 pl-0 mb-3"><%= f.select :genre, Fridge.genres.keys.map { |k| [I18n.t("enums.fridge.genre.#{k}"), k]},{},{class:"form-control form-control text-center"} %></div>
+      <div class="col-6 order-1 order-sm-2 col-sm-4 pl-0 mb-2"><%= f.text_field :food_name, maxlength: '20', placeholder: 'たまねぎ', class: "form-control" %></div>
+      <div class="col-3 order-2 order-sm-3 col-sm-2 pl-0"><%= f.number_field :amount, step: "0.1", min: 0, max: 2000, class: "form-control" %></div>
+      <div class="col-3 order-3 order-sm-4 col-sm-2 pl-0"><%= f.text_field :unit, placeholder: '個、g', class: "form-control" %></div>
+      <div class="col-3 order-last col-sm-1 pl-0"><%= f.submit '追加', class:"btn btn-info font-weight-bold" %></div>
     </div>
   </div>
   <% end %>
-  <div class="row pt-3">  <!--タブ部分-->
-    <div class="col-10 mx-auto">
-      <ul class="nav nav-tabs" id="myTab" role="tablist">
-        <li class="nav-item">
-          <a class="nav-link active px-4 mr-2" id="vegetable-tab" data-toggle="tab" href="#vegetable" role="tab" aria-controls="vegetable" aria-selected="true">野菜</a>
+  <div class="row px-2">  <!--タブ部分-->
+    <div class="col-12 col-lg-10 mx-auto">
+      <ul class="row nav nav-tabs text-center" id="myTab" role="tablist">
+        <li class="col-2 col-lg nav-item px-0">
+          <a class="nav-link active px-0" id="vegetable-tab" data-toggle="tab" href="#vegetable" role="tab" aria-controls="vegetable" aria-selected="true">野菜</a>
         </li>
-        <li class="nav-item">
-          <a class="nav-link px-4 mr-2" id="meat-tab" data-toggle="tab" href="#meat" role="tab" aria-controls="meat" aria-selected="false">肉</a>
+        <li class="col-2 col-lg nav-item px-0">
+          <a class="nav-link px-0" id="meat-tab" data-toggle="tab" href="#meat" role="tab" aria-controls="meat" aria-selected="false">肉</a>
         </li>
-        <li class="nav-item">
-          <a class="nav-link px-4 mr-2" id="seafood-tab" data-toggle="tab" href="#seafood" role="tab" aria-controls="seafood" aria-selected="false">魚介</a>
+        <li class="col-2 col-lg nav-item px-0">
+          <a class="nav-link px-0" id="seafood-tab" data-toggle="tab" href="#seafood" role="tab" aria-controls="seafood" aria-selected="false">魚介</a>
         </li>
-        <li class="nav-item">
-          <a class="nav-link px-4 mr-2" id="staple_food_and_flour-tab" data-toggle="tab" href="#staple_food_and_flour" role="tab" aria-controls="staple_food_and_flour" aria-selected="false">主食・粉</a>
+        <li class="col-3 col-lg nav-item px-0">
+          <a class="nav-link px-0" id="staple_food_and_flour-tab" data-toggle="tab" href="#staple_food_and_flour" role="tab" aria-controls="staple_food_and_flour" aria-selected="false">主食・粉</a>
         </li>
-        <li class="nav-item">
-          <a class="nav-link px-4 mr-2" id="eggs_and_milk_and_beans-tab" data-toggle="tab" href="#eggs_and_milk_and_beans" role="tab" aria-controls="eggs_and_milk_and_beans" aria-selected="false">卵・乳・豆</a>
+        <li class="col-3 col-lg nav-item px-0">
+          <a class="nav-link px-0" id="eggs_and_milk_and_beans-tab" data-toggle="tab" href="#eggs_and_milk_and_beans" role="tab" aria-controls="eggs_and_milk_and_beans" aria-selected="false">卵・乳・豆</a>
         </li>
-        <li class="nav-item">
-          <a class="nav-link px-4 mr-2" id="fruit_and_dessert-tab" data-toggle="tab" href="#fruit_and_dessert" role="tab" aria-controls="fruit_and_dessert" aria-selected="false">フルーツ・デザート</a>
+        <li class="col-6 col-sm-4 col-lg-2 nav-item px-0">
+          <a class="nav-link px-0" id="fruit_and_dessert-tab" data-toggle="tab" href="#fruit_and_dessert" role="tab" aria-controls="fruit_and_dessert" aria-selected="false">フルーツ・デザート</a>
         </li>
-        <li class="nav-item">
-          <a class="nav-link px-4 mr-2" id="seasoning-tab" data-toggle="tab" href="#seasoning" role="tab" aria-controls="seasoning" aria-selected="false">調味料</a>
+        <li class="col-3 col-sm-4 col-lg nav-item px-0">
+          <a class="nav-link px-0" id="seasoning-tab" data-toggle="tab" href="#seasoning" role="tab" aria-controls="seasoning" aria-selected="false">調味料</a>
         </li>
-        <li class="nav-item">
-          <a class="nav-link px-4" id="others-tab" data-toggle="tab" href="#others" role="tab" aria-controls="others" aria-selected="false">その他</a>
+        <li class="col-3 col-sm-4 col-lg nav-item px-0">
+          <a class="nav-link px-0" id="others-tab" data-toggle="tab" href="#others" role="tab" aria-controls="others" aria-selected="false">その他</a>
         </li>
       </ul>
       <div class="tab-content" id="myTabContent">
         <div class="tab-pane fade show active" id="vegetable" role="tabpanel" aria-labelledby="vegetable-tab">
-          <table class="mt-3 table borderless">
-            <tbody class="border-bottom">
-            <% @vegetable_fridges.each do |vegetable_fridge| %>
-              <tr>
-              <%= form_with model: @fridge, url: fridge_path(vegetable_fridge.id), method: :PATCH, local: true do |f| %>
-                <td class="col-3 align-bottom"><%= link_to vegetable_fridge.food_name, ingredient_search_path(vegetable_fridge.food_name) %></td>
-                <td class="col-1 align-bottom"><%= rounded_decimel(vegetable_fridge.amount) %><%= vegetable_fridge.unit %></td>
-                <td class="col-2"><%= f.number_field :amount, step: "0.1", min: 0, max: 2000, class: "form-control" %></td>
-                <td class="col-1 align-bottom"><%= vegetable_fridge.unit %></td>
-                <td class="col-2"><%= f.submit '変更', class:"btn btn-info font-weight-bold px-2 mr-2" %><%= link_to("削除", fridge_path(vegetable_fridge.id), method: :delete, class: "btn btn-danger font-weight-bold px-2") %></td>
-              <% end %>
-              </tr>
+          <% @vegetable_fridges.each do |vegetable_fridge| %>
+            <%= form_with model: @fridge, url: fridge_path(vegetable_fridge.id), method: :PATCH, local: true do |f| %>
+              <div class="row mt-2 mb-2 pb-2 align-items-end border-bottom">
+                <div class="col-6 order-first col-sm-4">
+                  <%= link_to vegetable_fridge.food_name, ingredient_search_path(vegetable_fridge.food_name) %>
+                </div>
+                <div class="col-4 order-2 order-sm-2 col-sm-2 text-center">
+                  <%= rounded_decimel(vegetable_fridge.amount) %><%= vegetable_fridge.unit %>
+                </div>
+                <div class="col offset-5 order-4 order-sm-3 col-sm offset-sm-0 mt-1">
+                  <%= f.number_field :amount, step: "0.1", min: 0, max: 2000, class: "form-control" %>
+                </div>
+                <div class="col order-5 order-sm-4 col-sm px-0">
+                  <%= vegetable_fridge.unit %>
+                </div>
+                <div class="col-2 order-6 order-sm-5 col-sm px-0">
+                  <%= f.submit '変更', class:"btn btn-info font-weight-bold px-2" %>
+                </div>
+                <div class="col-2 order-3 order-sm-6 col-sm px-0">
+                  <%= link_to("削除", fridge_path(vegetable_fridge.id), method: :delete, class: "btn btn-danger font-weight-bold px-2") %>
+                </div>
+              </div>
             <% end %>
-            </tbody>
-          </table>
+          <% end %>
         </div>
         <div class="tab-pane fade" id="meat" role="tabpanel" aria-labelledby="meat-tab">
-          <table class="mt-3 table borderless">
-            <tbody class="border-bottom">
-            <% @meat_fridges.each do |meat_fridge| %>
-              <tr>
-              <%= form_with model: @fridge, url: fridge_path(meat_fridge.id), method: :PATCH, local: true do |f| %>
-                <td class="col-3 align-bottom"><%= link_to meat_fridge.food_name, ingredient_search_path(meat_fridge.food_name) %></td>
-                <td class="col-1 align-bottom"><%= rounded_decimel(meat_fridge.amount) %><%= meat_fridge.unit %></td>
-                <td class="col-2"><%= f.number_field :amount, step: "0.1", min: 0, max: 2000, class: "form-control" %></td>
-                <td class="col-1 align-bottom"><%= meat_fridge.unit %></td>
-                <td class="col-2"><%= f.submit '変更', class:"btn btn-info font-weight-bold px-2 mr-2" %><%= link_to("削除", fridge_path(meat_fridge.id), method: :delete, class: "btn btn-danger font-weight-bold px-2") %></td>
-              <% end %>
-              </tr>
+          <% @meat_fridges.each do |meat_fridge| %>
+            <%= form_with model: @fridge, url: fridge_path(meat_fridge.id), method: :PATCH, local: true do |f| %>
+              <div class="row mt-2 mb-2 pb-2 align-items-end border-bottom">
+                <div class="col-6 order-first col-sm-4">
+                  <%= link_to meat_fridge.food_name, ingredient_search_path(meat_fridge.food_name) %>
+                </div>
+                <div class="col-4 order-2 order-sm-2 col-sm-2 text-center">
+                  <%= rounded_decimel(meat_fridge.amount) %><%= meat_fridge.unit %>
+                </div>
+                <div class="col offset-5 order-4 order-sm-3 col-sm offset-sm-0 mt-1">
+                  <%= f.number_field :amount, step: "0.1", min: 0, max: 2000, class: "form-control" %>
+                </div>
+                <div class="col order-5 order-sm-4 col-sm px-0">
+                  <%= meat_fridge.unit %>
+                </div>
+                <div class="col-2 order-6 order-sm-5 col-sm px-0">
+                  <%= f.submit '変更', class:"btn btn-info font-weight-bold px-2" %>
+                </div>
+                <div class="col-2 order-3 order-sm-6 col-sm px-0">
+                  <%= link_to("削除", fridge_path(meat_fridge.id), method: :delete, class: "btn btn-danger font-weight-bold px-2") %>
+                </div>
+              </div>
             <% end %>
-            </tbody>
-          </table>
+          <% end %>
         </div>
         <div class="tab-pane fade" id="seafood" role="tabpanel" aria-labelledby="seafood-tab">
-          <table class="mt-3 table borderless">
-            <tbody class="border-bottom">
-            <% @seafood_fridges.each do |seafood_fridge| %>
-              <tr>
-              <%= form_with model: @fridge, url: fridge_path(seafood_fridge.id), method: :PATCH, local: true do |f| %>
-                <td class="col-3 align-bottom"><%= link_to seafood_fridge.food_name, ingredient_search_path(seafood_fridge.food_name) %></td>
-                <td class="col-1 align-bottom"><%= rounded_decimel(seafood_fridge.amount) %><%= seafood_fridge.unit %></td>
-                <td class="col-2"><%= f.number_field :amount, step: "0.1", min: 0, max: 2000, class: "form-control" %></td>
-                <td class="col-1 align-bottom"><%= seafood_fridge.unit %></td>
-                <td class="col-2"><%= f.submit '変更', class:"btn btn-info font-weight-bold px-2 mr-2" %><%= link_to("削除", fridge_path(seafood_fridge.id), method: :delete, class: "btn btn-danger font-weight-bold px-2") %></td>
-              <% end %>
-              </tr>
+          <% @seafood_fridges.each do |seafood_fridge| %>
+            <%= form_with model: @fridge, url: fridge_path(seafood_fridge.id), method: :PATCH, local: true do |f| %>
+              <div class="row mt-2 mb-2 pb-2 align-items-end border-bottom">
+                <div class="col-6 order-first col-sm-4">
+                  <%= link_to seafood_fridge.food_name, ingredient_search_path(seafood_fridge.food_name) %>
+                </div>
+                <div class="col-4 order-2 order-sm-2 col-sm-2 text-center">
+                  <%= rounded_decimel(seafood_fridge.amount) %><%= seafood_fridge.unit %>
+                </div>
+                <div class="col offset-5 order-4 order-sm-3 col-sm offset-sm-0 mt-1">
+                  <%= f.number_field :amount, step: "0.1", min: 0, max: 2000, class: "form-control" %>
+                </div>
+                <div class="col order-5 order-sm-4 col-sm px-0">
+                  <%= seafood_fridge.unit %>
+                </div>
+                <div class="col-2 order-6 order-sm-5 col-sm px-0">
+                  <%= f.submit '変更', class:"btn btn-info font-weight-bold px-2" %>
+                </div>
+                <div class="col-2 order-3 order-sm-6 col-sm px-0">
+                  <%= link_to("削除", fridge_path(seafood_fridge.id), method: :delete, class: "btn btn-danger font-weight-bold px-2") %>
+                </div>
+              </div>
             <% end %>
-            </tbody>
-          </table>
+          <% end %>
         </div>
         <div class="tab-pane fade" id="staple_food_and_flour" role="tabpanel" aria-labelledby="staple_food_and_flour-tab">
-          <table class="mt-3 table borderless">
-            <tbody class="border-bottom">
-            <% @staple_food_and_flour_fridges.each do |staple_food_and_flour_fridge| %>
-              <tr>
-              <%= form_with model: @fridge, url: fridge_path(staple_food_and_flour_fridge.id), method: :PATCH, local: true do |f| %>
-                <td class="col-3 align-bottom"><%= link_to staple_food_and_flour_fridge.food_name, ingredient_search_path(staple_food_and_flour_fridge.food_name) %></td>
-                <td class="col-1 align-bottom"><%= rounded_decimel(staple_food_and_flour_fridge.amount) %><%= staple_food_and_flour_fridge.unit %></td>
-                <td class="col-2"><%= f.number_field :amount, step: "0.1", min: 0, max: 2000, class: "form-control" %></td>
-                <td class="col-1 align-bottom"><%= staple_food_and_flour_fridge.unit %></td>
-                <td class="col-2"><%= f.submit '変更', class:"btn btn-info font-weight-bold px-2 mr-2" %><%= link_to("削除", fridge_path(staple_food_and_flour_fridge.id), method: :delete, class: "btn btn-danger font-weight-bold px-2") %></td>
-              <% end %>
-              </tr>
+          <% @staple_food_and_flour_fridges.each do |staple_food_and_flour_fridge| %>
+            <%= form_with model: @fridge, url: fridge_path(staple_food_and_flour_fridge.id), method: :PATCH, local: true do |f| %>
+              <div class="row mt-2 mb-2 pb-2 align-items-end border-bottom">
+                <div class="col-6 order-first col-sm-4">
+                  <%= link_to staple_food_and_flour_fridge.food_name, ingredient_search_path(staple_food_and_flour_fridge.food_name) %>
+                </div>
+                <div class="col-4 order-2 order-sm-2 col-sm-2 text-center">
+                  <%= rounded_decimel(staple_food_and_flour_fridge.amount) %><%= staple_food_and_flour_fridge.unit %>
+                </div>
+                <div class="col offset-5 order-4 order-sm-3 col-sm offset-sm-0 mt-1">
+                  <%= f.number_field :amount, step: "0.1", min: 0, max: 2000, class: "form-control" %>
+                </div>
+                <div class="col order-5 order-sm-4 col-sm px-0">
+                  <%= staple_food_and_flour_fridge.unit %>
+                </div>
+                <div class="col-2 order-6 order-sm-5 col-sm px-0">
+                  <%= f.submit '変更', class:"btn btn-info font-weight-bold px-2" %>
+                </div>
+                <div class="col-2 order-3 order-sm-6 col-sm px-0">
+                  <%= link_to("削除", fridge_path(staple_food_and_flour_fridge.id), method: :delete, class: "btn btn-danger font-weight-bold px-2") %>
+                </div>
+              </div>
             <% end %>
-            </tbody>
-          </table>
+          <% end %>
         </div>
         <div class="tab-pane fade" id="eggs_and_milk_and_beans" role="tabpanel" aria-labelledby="eggs_and_milk_and_beans-tab">
-          <table class="mt-3 table borderless">
-            <tbody class="border-bottom">
-            <% @eggs_and_milk_and_beans_fridges.each do |eggs_and_milk_and_beans_fridge| %>
-              <tr>
-              <%= form_with model: @fridge, url: fridge_path(eggs_and_milk_and_beans_fridge.id), method: :PATCH, local: true do |f| %>
-                <td class="col-3 align-bottom"><%= link_to eggs_and_milk_and_beans_fridge.food_name, ingredient_search_path(eggs_and_milk_and_beans_fridge.food_name) %></td>
-                <td class="col-1 align-bottom"><%= rounded_decimel(eggs_and_milk_and_beans_fridge.amount) %><%= eggs_and_milk_and_beans_fridge.unit %></td>
-                <td class="col-2"><%= f.number_field :amount, step: "0.1", min: 0, max: 2000, class: "form-control" %></td>
-                <td class="col-1 align-bottom"><%= eggs_and_milk_and_beans_fridge.unit %></td>
-                <td class="col-2"><%= f.submit '変更', class:"btn btn-info font-weight-bold px-2 mr-2" %><%= link_to("削除", fridge_path(eggs_and_milk_and_beans_fridge.id), method: :delete, class: "btn btn-danger font-weight-bold px-2") %></td>
-              <% end %>
-              </tr>
+          <% @eggs_and_milk_and_beans_fridges.each do |eggs_and_milk_and_beans_fridge| %>
+            <%= form_with model: @fridge, url: fridge_path(eggs_and_milk_and_beans_fridge.id), method: :PATCH, local: true do |f| %>
+              <div class="row mt-2 mb-2 pb-2 align-items-end border-bottom">
+                <div class="col-6 order-first col-sm-4">
+                  <%= link_to eggs_and_milk_and_beans_fridge.food_name, ingredient_search_path(eggs_and_milk_and_beans_fridge.food_name) %>
+                </div>
+                <div class="col-4 order-2 order-sm-2 col-sm-2 text-center">
+                  <%= rounded_decimel(eggs_and_milk_and_beans_fridge.amount) %><%= eggs_and_milk_and_beans_fridge.unit %>
+                </div>
+                <div class="col offset-5 order-4 order-sm-3 col-sm offset-sm-0 mt-1">
+                  <%= f.number_field :amount, step: "0.1", min: 0, max: 2000, class: "form-control" %>
+                </div>
+                <div class="col order-5 order-sm-4 col-sm px-0">
+                  <%= eggs_and_milk_and_beans_fridge.unit %>
+                </div>
+                <div class="col-2 order-6 order-sm-5 col-sm px-0">
+                  <%= f.submit '変更', class:"btn btn-info font-weight-bold px-2" %>
+                </div>
+                <div class="col-2 order-3 order-sm-6 col-sm px-0">
+                  <%= link_to("削除", fridge_path(eggs_and_milk_and_beans_fridge.id), method: :delete, class: "btn btn-danger font-weight-bold px-2") %>
+                </div>
+              </div>
             <% end %>
-            </tbody>
-          </table>
+          <% end %>
         </div>
         <div class="tab-pane fade" id="fruit_and_dessert" role="tabpanel" aria-labelledby="fruit_and_dessert-tab">
-          <table class="mt-3 table borderless">
-            <tbody class="border-bottom">
-            <% @fruit_and_dessert_fridges.each do |fruit_and_dessert_fridge| %>
-              <tr>
-              <%= form_with model: @fridge, url: fridge_path(fruit_and_dessert_fridge.id), method: :PATCH, local: true do |f| %>
-                <td class="col-3 align-bottom"><%= link_to fruit_and_dessert_fridge.food_name, ingredient_search_path(fruit_and_dessert_fridge.food_name) %></td>
-                <td class="col-1 align-bottom"><%= rounded_decimel(fruit_and_dessert_fridge.amount) %><%= fruit_and_dessert_fridge.unit %></td>
-                <td class="col-2"><%= f.number_field :amount, step: "0.1", min: 0, max: 2000, class: "form-control" %></td>
-                <td class="col-1 align-bottom"><%= fruit_and_dessert_fridge.unit %></td>
-                <td class="col-2"><%= f.submit '変更', class:"btn btn-info font-weight-bold px-2 mr-2" %><%= link_to("削除", fridge_path(fruit_and_dessert_fridge.id), method: :delete, class: "btn btn-danger font-weight-bold px-2") %></td>
-              <% end %>
-              </tr>
+          <% @fruit_and_dessert_fridges.each do |fruit_and_dessert_fridge| %>
+            <%= form_with model: @fridge, url: fridge_path(fruit_and_dessert_fridge.id), method: :PATCH, local: true do |f| %>
+              <div class="row mt-2 mb-2 pb-2 align-items-end border-bottom">
+                <div class="col-6 order-first col-sm-4">
+                  <%= link_to fruit_and_dessert_fridge.food_name, ingredient_search_path(fruit_and_dessert_fridge.food_name) %>
+                </div>
+                <div class="col-4 order-2 order-sm-2 col-sm-2 text-center">
+                  <%= rounded_decimel(fruit_and_dessert_fridge.amount) %><%= fruit_and_dessert_fridge.unit %>
+                </div>
+                <div class="col offset-5 order-4 order-sm-3 col-sm offset-sm-0 mt-1">
+                  <%= f.number_field :amount, step: "0.1", min: 0, max: 2000, class: "form-control" %>
+                </div>
+                <div class="col order-5 order-sm-4 col-sm px-0">
+                  <%= fruit_and_dessert_fridge.unit %>
+                </div>
+                <div class="col-2 order-6 order-sm-5 col-sm px-0">
+                  <%= f.submit '変更', class:"btn btn-info font-weight-bold px-2" %>
+                </div>
+                <div class="col-2 order-3 order-sm-6 col-sm px-0">
+                  <%= link_to("削除", fridge_path(fruit_and_dessert_fridge.id), method: :delete, class: "btn btn-danger font-weight-bold px-2") %>
+                </div>
+              </div>
             <% end %>
-            </tbody>
-          </table>
+          <% end %>
         </div>
         <div class="tab-pane fade" id="seasoning" role="tabpanel" aria-labelledby="seasoning-tab">
-          <table class="mt-3 table borderless">
-            <tbody class="border-bottom">
-            <% @seasoning_fridges.each do |seasoning_fridge| %>
-              <tr>
-              <%= form_with model: @fridge, url: fridge_path(seasoning_fridge.id), method: :PATCH, local: true do |f| %>
-                <td class="col-3 align-bottom"><%= link_to seasoning_fridge.food_name, ingredient_search_path(seasoning_fridge.food_name) %></td>
-                <td class="col-1 align-bottom"><%= rounded_decimel(seasoning_fridge.amount) %><%= seasoning_fridge.unit %></td>
-                <td class="col-2"><%= f.number_field :amount, step: "0.1", min: 0, max: 2000, class: "form-control" %></td>
-                <td class="col-1 align-bottom"><%= seasoning_fridge.unit %></td>
-                <td class="col-2"><%= f.submit '変更', class:"btn btn-info font-weight-bold px-2 mr-2" %><%= link_to("削除", fridge_path(seasoning_fridge.id), method: :delete, class: "btn btn-danger font-weight-bold px-2") %></td>
-              <% end %>
-              </tr>
+          <% @seasoning_fridges.each do |seasoning_fridge| %>
+            <%= form_with model: @fridge, url: fridge_path(seasoning_fridge.id), method: :PATCH, local: true do |f| %>
+              <div class="row mt-2 mb-2 pb-2 align-items-end border-bottom">
+                <div class="col-6 order-first col-sm-4">
+                  <%= link_to seasoning_fridge.food_name, ingredient_search_path(seasoning_fridge.food_name) %>
+                </div>
+                <div class="col-4 order-2 order-sm-2 col-sm-2 text-center">
+                  <%= rounded_decimel(seasoning_fridge.amount) %><%= seasoning_fridge.unit %>
+                </div>
+                <div class="col offset-5 order-4 order-sm-3 col-sm offset-sm-0 mt-1">
+                  <%= f.number_field :amount, step: "0.1", min: 0, max: 2000, class: "form-control" %>
+                </div>
+                <div class="col order-5 order-sm-4 col-sm px-0">
+                  <%= seasoning_fridge.unit %>
+                </div>
+                <div class="col-2 order-6 order-sm-5 col-sm px-0">
+                  <%= f.submit '変更', class:"btn btn-info font-weight-bold px-2" %>
+                </div>
+                <div class="col-2 order-3 order-sm-6 col-sm px-0">
+                  <%= link_to("削除", fridge_path(seasoning_fridge.id), method: :delete, class: "btn btn-danger font-weight-bold px-2") %>
+                </div>
+              </div>
             <% end %>
-            </tbody>
-          </table>
+          <% end %>
         </div>
         <div class="tab-pane fade" id="others" role="tabpanel" aria-labelledby="others-tab">
-          <table class="mt-3 table borderless">
-            <tbody class="border-bottom">
-            <% @others_fridges.each do |others_fridge| %>
-              <tr>
-              <%= form_with model: @fridge, url: fridge_path(others_fridge.id), method: :PATCH, local: true do |f| %>
-                <td class="col-3 align-bottom"><%= link_to others_fridge.food_name, ingredient_search_path(others_fridge.food_name) %></td>
-                <td class="col-1 align-bottom"><%= rounded_decimel(others_fridge.amount) %><%= others_fridge.unit %></td>
-                <td class="col-2"><%= f.number_field :amount, step: "0.1", min: 0, max: 2000, class: "form-control" %></td>
-                <td class="col-1 align-bottom"><%= others_fridge.unit %></td>
-                <td class="col-2"><%= f.submit '変更', class:"btn btn-info font-weight-bold px-2 mr-2" %><%= link_to("削除", fridge_path(others_fridge.id), method: :delete, class: "btn btn-danger font-weight-bold px-2") %></td>
-              <% end %>
-              </tr>
+          <% @others_fridges.each do |others_fridge| %>
+            <%= form_with model: @fridge, url: fridge_path(others_fridge.id), method: :PATCH, local: true do |f| %>
+              <div class="row mt-2 mb-2 pb-2 align-items-end border-bottom">
+                <div class="col-6 order-first col-sm-4">
+                  <%= link_to others_fridge.food_name, ingredient_search_path(others_fridge.food_name) %>
+                </div>
+                <div class="col-4 order-2 order-sm-2 col-sm-2 text-center">
+                  <%= rounded_decimel(others_fridge.amount) %><%= others_fridge.unit %>
+                </div>
+                <div class="col offset-5 order-4 order-sm-3 col-sm offset-sm-0 mt-1">
+                  <%= f.number_field :amount, step: "0.1", min: 0, max: 2000, class: "form-control" %>
+                </div>
+                <div class="col order-5 order-sm-4 col-sm px-0">
+                  <%= others_fridge.unit %>
+                </div>
+                <div class="col-2 order-6 order-sm-5 col-sm px-0">
+                  <%= f.submit '変更', class:"btn btn-info font-weight-bold px-2" %>
+                </div>
+                <div class="col-2 order-3 order-sm-6 col-sm px-0">
+                  <%= link_to("削除", fridge_path(others_fridge.id), method: :delete, class: "btn btn-danger font-weight-bold px-2") %>
+                </div>
+              </div>
             <% end %>
-            </tbody>
-          </table>
+          <% end %>
         </div>
       </div>
     </div>
