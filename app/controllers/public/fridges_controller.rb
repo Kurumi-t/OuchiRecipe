@@ -57,21 +57,39 @@ class Public::FridgesController < ApplicationController
   end
 
   def update
+    @user = current_user
     fridge = Fridge.find(params[:id])
     if fridge.update(fridge_params)
-      redirect_to fridges_path(current_user.id)
+      redirect_to fridges_path(@user.id)
     else
       @fridges = Fridge.all
+      @vegetable_fridges = Fridge.where(user_id: @user.id, genre: 0)
+      @meat_fridges = Fridge.where(user_id: @user.id, genre: 1)
+      @seafood_fridges = Fridge.where(user_id: @user.id, genre: 2)
+      @staple_food_and_flour_fridges = Fridge.where(user_id: @user.id, genre: 3)
+      @eggs_and_milk_and_beans_fridges = Fridge.where(user_id: @user.id, genre: 4)
+      @fruit_and_dessert_fridges = Fridge.where(user_id: @user.id, genre: 5)
+      @seasoning_fridges = Fridge.where(user_id: @user.id, genre: 6)
+      @others_fridges = Fridge.where(user_id: @user.id, genre: 7)
       render :index
     end
   end
 
   def destroy
+    @user = current_user
     fridge = Fridge.find(params[:id])
     if fridge.destroy
       redirect_to fridges_path(current_user.id)
     else
       @fridges = Fridge.all
+      @vegetable_fridges = Fridge.where(user_id: @user.id, genre: 0)
+      @meat_fridges = Fridge.where(user_id: @user.id, genre: 1)
+      @seafood_fridges = Fridge.where(user_id: @user.id, genre: 2)
+      @staple_food_and_flour_fridges = Fridge.where(user_id: @user.id, genre: 3)
+      @eggs_and_milk_and_beans_fridges = Fridge.where(user_id: @user.id, genre: 4)
+      @fruit_and_dessert_fridges = Fridge.where(user_id: @user.id, genre: 5)
+      @seasoning_fridges = Fridge.where(user_id: @user.id, genre: 6)
+      @others_fridges = Fridge.where(user_id: @user.id, genre: 7)
       render :index
     end
   end
