@@ -7,6 +7,13 @@ class Public::ShoppingListsController < ApplicationController
     @fridge = Fridge.new
   end
 
+  def to_fridge
+    @user = current_user
+    @shopping_lists = ShoppingList.all
+    @shopping_list = ShoppingList.new
+    @fridge = Fridge.new
+  end
+
   def create
     @user = current_user
     @shopping_list = ShoppingList.new(shopping_list_params)
