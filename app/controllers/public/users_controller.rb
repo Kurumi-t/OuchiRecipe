@@ -2,13 +2,13 @@ class Public::UsersController < ApplicationController
   before_action :authenticate_user!
   def show
     @user = current_user
-    @post_recipes = PostRecipe.where("user_id = ? and is_draft = ?", @user.id, false).page(params[:page]).per(12)
+    @post_recipes = PostRecipe.where("user_id = ? and is_draft = ?", @user.id, false).page(params[:page]).per(16)
     @post_recipe_count = @post_recipes.all.count
   end
 
   def confirm
     @user = current_user
-    @post_recipes = PostRecipe.where("user_id = ? and is_draft = ?", @user.id, true).page(params[:page]).per(10)
+    @post_recipes = PostRecipe.where("user_id = ? and is_draft = ?", @user.id, true).page(params[:page]).per(16)
     @post_recipe_count = @post_recipes.all.count
   end
 
@@ -19,7 +19,7 @@ class Public::UsersController < ApplicationController
   def update
     @user = current_user
     @user.update(user_params)
-    redirect_to users_my_page_path
+    redirect_to my_page_path
   end
 
   def withdraw
