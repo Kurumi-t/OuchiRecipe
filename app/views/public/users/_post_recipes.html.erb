@@ -1,0 +1,13 @@
+<div class="row text-center">
+  <% @post_recipes.each do |post_recipe| %>
+    <div class="col-6 col-sm-3">
+      <%= link_to(post_recipe_path(post_recipe.id), class: "text-dark") do %>
+        <%= image_tag post_recipe.get_recipe_image(270,150), class:"img-fluid rounded" %>
+        <p><%= post_recipe.title %></p>
+      <% end %>
+    </div>
+  <% end %>
+  <div class="col-12 mx-auto">
+    <%= paginate @post_recipes %>
+  </div>
+</div>
