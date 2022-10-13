@@ -25,6 +25,7 @@ Rails.application.routes.draw do
     get 'ingredient_search/:ingredient_name' => 'searches#ingredient_search',as: 'ingredient_search'
     get 'my_page' => 'users#show'
     get 'confirm' => 'users#confirm'
+    get 'to_fridge' => 'shopping_lists#to_fridge'
     delete 'shopping_lists/destroy_all' => 'shopping_lists#destroy_all'
     get 'withdraw' => 'users#withdraw'
     patch 'withdraw_update' => 'users#withdraw_update'
