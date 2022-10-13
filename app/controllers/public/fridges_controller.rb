@@ -41,7 +41,7 @@ class Public::FridgesController < ApplicationController
     if @fridge.save
       @shopping_list = ShoppingList.find_by(id: params[:fridge][:shopping_list_id])
       @shopping_list.destroy
-      redirect_to fridges_path(@user.id)
+      redirect_to to_fridge_path(@user.id)
     else
       @fridges = Fridge.all
       @vegetable_fridges = Fridge.where(user_id: @user.id, genre: 0)
