@@ -1,10 +1,13 @@
 <div class="container">
   <div class="row pt-3">
-    <div class="col-8 mx-auto">
+    <div class="col-12 col-lg-8 mx-auto">
       <h4 class="text-center mb-3">
         <%= link_to(admin_user_path(@user.id), class: "text-dark") do %>
-          <%= @user.name %>
-        <% end %>のコメント　<%= @post_comment_count %>件
+          <%= image_tag @user.get_profile_image(480,480), class:"col-2 col-sm-1 img-fluid rounded-circle px-0" %>
+          <%= @user.name %>さん
+        <% end %>
+        のコメント
+        <%= @post_comment_count %>件
       </h4>
       <% if @post_comment_count == 0 %>
         <p>コメントはまだありません。</p>
@@ -14,7 +17,6 @@
             <tbody class="table-borderless">
               <tr>
                 <td colspan="2"><%= post_comment.comment %></td>
-                <td></td>
               </tr>
               <tr>
                 <td class="col-2"><%= post_comment.created_at.strftime('%Y/%m/%d') %></td>
@@ -23,11 +25,16 @@
                     <%= post_comment.post_recipe.title %>
                   <% end %>
                 </td>
-                <td class="col-5 text-right"><%= link_to("このレシピのコメント一覧へ", admin_post_recipe_post_comments_path(post_comment.post_recipe, post_comment), class: "btn btn-info font-weight-bold px-4 mx-1") %></td>
+              </tr>
+              <tr>
+                <td colspan="2", class="text-center">
+                  <%= link_to("このレシピのコメント一覧へ", admin_post_recipe_post_comments_path(post_comment.post_recipe, post_comment), class: "btn btn-outline-info") %>
+                </td>
               </tr>
             </tbody>
           </table>
         <% end %>
+        <%= paginate @post_comments %>
       <% end %>
     </div>
   </div>
