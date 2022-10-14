@@ -1,7 +1,7 @@
 class Admin::UsersController < ApplicationController
   def show
     @user = User.find(params[:id])
-    @post_recipes = @user.post_recipes
+    @post_recipes = @user.post_recipes.page(params[:page]).per(16)
   end
 
   def edit
