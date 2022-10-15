@@ -16,10 +16,11 @@ Rails.application.routes.draw do
     resources :users, only: [:show, :edit, :update] do
       resources :post_comments, only: [:show]
     end
-    resources :post_recipes, only: [:index, :show, :destroy] do
+    resources :post_recipes, only: [:index, :destroy] do
       resources :post_comments, only: [:index, :destroy]
     end
   end
+
   scope module: :public do
     get 'search' => 'searches#search'
     get 'ingredient_search/:ingredient_name' => 'searches#ingredient_search',as: 'ingredient_search'
