@@ -2,7 +2,7 @@
   <div class="row pt-3">
     <div class="col-12 col-lg-8 mx-auto">
       <h4 class="text-center mb-3">
-      <%= link_to(admin_post_recipe_path(@post_recipe), class: "text-dark") do %>
+      <%= link_to(post_recipe_path(@post_recipe), class: "text-dark") do %>
         <%= @post_recipe.title %>
       <% end %>のコメント　<%= @post_comment_count %>件
       </h4>
