@@ -1,12 +1,6 @@
 class Admin::PostRecipesController < ApplicationController
   def index
-    @post_recipes = PostRecipe.all
-  end
-
-  def show
-    @post_recipe = PostRecipe.find(params[:id])
-    @ingredients = @post_recipe.ingredients
-    @making_recipes = @post_recipe.making_recipes
+    @post_recipes = PostRecipe.where("is_draft = ?", false).page(params[:page]).per(20)
   end
 
   def destroy
@@ -14,7 +8,7 @@ class Admin::PostRecipesController < ApplicationController
     if post_recipe.destroy
       redirect_to admin_user_path(post_recipe.user.id)
     else
-      render :show
+      render templete: 'users/show'
     end
   end
 end
