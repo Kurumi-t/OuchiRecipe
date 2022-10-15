@@ -1,22 +1,4 @@
 <div class="container">
   <h4 class="text-center mb-3">レシピ一覧</h4>
-  <div class="row pt-3">
-    <table class="col-6 mx-auto mt-3 table border-bottom">
-      <tbody class="table-borderless">
-      <% @post_recipes.each do |post_recipe| %>
-        <tr>
-          <td class="col-3">
-            <%= link_to(admin_post_recipe_path(post_recipe.id), class: "text-dark") do %>
-              <%= image_tag post_recipe.get_recipe_image(200,100), class:"rounded" %>
-            <% end %>
-          </td>
-          <td class="col-9">
-            <%= link_to(admin_post_recipe_path(post_recipe.id), class: "text-dark mb-3") do %><%= post_recipe.title %><% end %><br>
-            <%= image_tag post_recipe.user.get_profile_image(35,35),class:"rounded-circle" %><%= post_recipe.user.name %>
-          </td>
-        </tr>
-      <% end %>
-      </tbody>
-    </table>
-  </div>
+  <%= render 'public/post_recipes/post_recipes' %>
 </div>
