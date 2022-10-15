@@ -29,13 +29,13 @@
             <div class="col-3 order-2 order-sm-2 col-sm-2 text-center">
               <%= rounded_decimel(shopping_list.amount) %><%= shopping_list.unit %>
             </div>
-            <div class="col-3 order-4 offset-5 offset-sm-0 order-sm-3 col-sm offset-sm-0 mt-2">
+            <div class="col-3 order-4 offset-5 offset-sm-0 order-sm-3 col-sm mt-2">
               <%= f.number_field :amount, step: "0.1", min: 0, max: 2000, class: "form-control" %>
             </div>
             <div class="col-2 order-5 order-sm-4 col-sm px-0">
               <%= shopping_list.unit %>
             </div>
-            <div class="col-2 order-6 order-sm-5 col-sm px-0">
+            <div class="col-4 order-6 order-sm-5 col-sm px-0">
               <%= f.submit '変更', class:"btn btn-info font-weight-bold px-2" %>
             </div>
             <div class="col-2 order-3 order-sm-6 col-sm px-0">

@@ -61,10 +61,12 @@
       </nav>
     </header>
     <main>
+      <% if user_signed_in? %>
       <div class="text-center">
         <p class="notice"><%= notice %></p>
         <p class="alert"><%= alert %></p>
       </div>
+      <% end %>
       <%= yield %>
     </main>
     <footer class="sticky-bottom fixed-bottom bg-white">
