@@ -18,12 +18,13 @@ class Public::PostRecipesController < ApplicationController
     @post_recipe.user_id = current_user.id
     if params[:post]
       @post_recipe.is_draft = false
-      if @post_recipe.save
+      if @post_recipe.save(context: :publicize)
         redirect_to post_recipe_path(@post_recipe.id), notice: "レシピを投稿しました！"
       else
         render :new, alert: "登録できませんでした。お手数ですが、入力内容をご確認のうえ再度お試しください"
       end
     else
+      @post_recipe.is_draft = true
       if @post_recipe.update(is_draft: true)
         redirect_to confirm_path, notice: "レシピを下書き保存しました！"
       else
@@ -45,22 +46,25 @@ class Public::PostRecipesController < ApplicationController
 
   def update
     @post_recipe = PostRecipe.find(params[:id])
-    if params[:publicize_draft]
+    @post_recipe.attributes = post_recipe_params
+    # updateメソッドにはcontextが使用できないため、公開処理にはattributesとsaveメソッドを使用する
+    if params[:publicize_draft] # 下書きレシピの更新（公開）の場合
         @post_recipe.is_draft = false
-      if @post_recipe.update(post_recipe_params)
+      if @post_recipe.save(context: :publicize)
         redirect_to post_recipe_path(@post_recipe.id), notice: "下書きのレシピを公開しました！"
       else
         @post_recipe.is_draft = true
         render :edit, alert: "レシピを公開できませんでした。お手数ですが、入力内容をご確認のうえ再度お試しください"
       end
-    elsif params[:update_post]
-      @post_recipe.attributes = post_recipe_params
+    elsif params[:update_post] # 公開済みレシピの更新の場合
+      @post_recipe.is_draft = false
       if @post_recipe.save(context: :publicize)
         redirect_to post_recipe_path(@post_recipe.id), notice: "レシピを更新しました！"
       else
         render :edit, alert: "レシピを更新できませんでした。お手数ですが、入力内容をご確認のうえ再度お試しください"
       end
-    else
+    else # 下書きレシピの更新（非公開）の場合
+      @post_recipe.is_draft = true
       if @post_recipe.update(post_recipe_params)
         redirect_to confirm_path, notice: "下書きレシピを更新しました！"
       else
