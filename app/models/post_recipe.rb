@@ -7,11 +7,11 @@ class PostRecipe < ApplicationRecord
   accepts_nested_attributes_for :ingredients, :making_recipes, allow_destroy: true, reject_if: :all_blank
 
   has_one_attached :recipe_image
-  validates :title, length: { maximum: 14 }, presence: true
-  validates :serving, presence: true
-  validates :advice, length: { maximum: 80 }, presence: true
   with_options presence: true, on: :publicize do
+    validates :recipe_image
+    validates :title
     validates :serving
+    validates :advice
   end
   validates :title, length: { maximum: 14 }, on: :publicize
   validates :advice, length: { maximum: 80 }, on: :publicize
@@ -27,6 +27,6 @@ class PostRecipe < ApplicationRecord
     favorites.exists?(user_id: user.id)
   end
   def self.search(words)
-    @post_recipe = PostRecipe.where("title LIKE ?", "%#{words}%").where(is_draft: false)
+    @post_recipe = PostRecipe.where("title LIKE ?", "#{words}%").where(is_draft: false)
   end
 end
