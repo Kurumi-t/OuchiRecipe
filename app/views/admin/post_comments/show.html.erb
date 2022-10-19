@@ -10,7 +10,7 @@
         <%= @post_comment_count %>件
       </h4>
       <% if @post_comment_count == 0 %>
-        <p>コメントはまだありません。</p>
+        <p class="text-center mt-5">コメントはまだありません。</p>
       <% else %>
         <% @post_comments.each do |post_comment| %>
           <table class="mt-3 table border-bottom">
