@@ -20,7 +20,7 @@
         </div>
         <div class="col-6 col-md-12">
           <%= link_to post_recipes_path, class: "btn btn-outline-danger" do %>
-            <i class="fa-regular fa-heart"></i>レシピ
+            <i class="fa-solid fa-heart"></i>レシピ
           <% end %>
           <p>いいねしたレシピ</p>
         </div>
@@ -44,7 +44,7 @@
     <div class="col-12 col-md-9 col-lg-10">
       <h4 class="text-center"><%= @user.name %>さんのレシピ<span class="ml-3"><%= @post_recipe_count %>品</span></h4>
       <div class="row text-center mt-3">
-        <div class="col-12 col-lg-10 mx-auto">
+        <div class="col-12 col-lg-10 mx-auto mt-5">
           <% if @post_recipe_count == 0 %>
             <p>
               <%= @user.name %>さんのレシピはまだありません。<br>
