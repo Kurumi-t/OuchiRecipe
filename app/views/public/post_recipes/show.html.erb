@@ -9,11 +9,11 @@
           <% if user_signed_in? %>
             <% if @post_recipe.favorited_by?(current_user) %>
               <%= link_to post_recipe_favorites_path(@post_recipe), method: :delete do %>
-                ♥<%= @post_recipe.favorites.count %> いいね
+                <i class="fa-solid fa-heart mr-1"></i>いいね <%= @post_recipe.favorites.count %>
               <% end %>
             <% else %>
               <%= link_to post_recipe_favorites_path(@post_recipe), method: :post do %>
-                ♡<%= @post_recipe.favorites.count %> いいね
+                <i class="fa-regular fa-heart mr-1"></i>いいね <%= @post_recipe.favorites.count %>
               <% end %>
             <% end %>
           <% else %>
@@ -23,7 +23,7 @@
         <% if admin_signed_in? %>
           <div class="col-6 col-sm-12 m-2">
           <%= link_to(admin_user_path(@post_recipe.user.id), class: "text-dark") do %>
-            <%= image_tag @post_recipe.user.get_profile_image(35,35),class:"rounded-circle" %>
+            <%= image_tag @post_recipe.user.get_profile_image(35,35), class:"rounded-circle mr-1" %>
             <%= @post_recipe.user.name %>
           <% end %>
           </div>
@@ -35,7 +35,8 @@
           </div>
         <% else %>
           <div class="col-6 col-sm-12 m-2">
-            <%= image_tag @post_recipe.user.get_profile_image(35,35),class:"rounded-circle ml-2" %><%= @post_recipe.user.name %>
+            <%= image_tag @post_recipe.user.get_profile_image(35,35),class:"rounded-circle mr-1" %>
+            <%= @post_recipe.user.name %>
           </div>
           <div class="col-6 col-sm-12">
             <%= link_to "コメントへ", post_recipe_post_comments_path(@post_recipe), class: "btn btn-info mt-2 mb-2" %>
