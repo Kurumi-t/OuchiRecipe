@@ -19,16 +19,20 @@ class Public::PostRecipesController < ApplicationController
     if params[:post]
       @post_recipe.is_draft = false
       if @post_recipe.save(context: :publicize)
-        redirect_to post_recipe_path(@post_recipe.id), notice: "レシピを投稿しました！"
+        flash[:notice] = "レシピを投稿しました！"
+        redirect_to post_recipe_path(@post_recipe.id)
       else
-        render :new, alert: "登録できませんでした。お手数ですが、入力内容をご確認のうえ再度お試しください"
+        flash[:alert] = "登録できませんでした。お手数ですが、入力内容をご確認のうえ再度お試しください。"
+        render :new
       end
     else
       @post_recipe.is_draft = true
       if @post_recipe.update(is_draft: true)
-        redirect_to confirm_path, notice: "レシピを下書き保存しました！"
+        flash[:notice] = "レシピを下書き保存しました！"
+        redirect_to confirm_path
       else
-        render :new, alert: "登録できませんでした。お手数ですが、入力内容をご確認のうえ再度お試しください"
+        flash[:alert] = "登録できませんでした。お手数ですが、入力内容をご確認のうえ再度お試しください。"
+        render :new
       end
     end
   end
@@ -51,24 +55,30 @@ class Public::PostRecipesController < ApplicationController
     if params[:publicize_draft] # 下書きレシピの更新（公開）の場合
         @post_recipe.is_draft = false
       if @post_recipe.save(context: :publicize)
-        redirect_to post_recipe_path(@post_recipe.id), notice: "下書きのレシピを公開しました！"
+        flash[:notice] = "下書きのレシピを公開しました！"
+        redirect_to post_recipe_path(@post_recipe.id)
       else
         @post_recipe.is_draft = true
-        render :edit, alert: "レシピを公開できませんでした。お手数ですが、入力内容をご確認のうえ再度お試しください"
+        flash[:alert] = "レシピを公開できませんでした。お手数ですが、入力内容をご確認のうえ再度お試しください。"
+        render :edit
       end
     elsif params[:update_post] # 公開済みレシピの更新の場合
       @post_recipe.is_draft = false
       if @post_recipe.save(context: :publicize)
-        redirect_to post_recipe_path(@post_recipe.id), notice: "レシピを更新しました！"
+        flash[:notice] = "レシピを更新しました！"
+        redirect_to post_recipe_path(@post_recipe.id)
       else
-        render :edit, alert: "レシピを更新できませんでした。お手数ですが、入力内容をご確認のうえ再度お試しください"
+        flash[:alert] = "レシピを更新できませんでした。お手数ですが、入力内容をご確認のうえ再度お試しください。"
+        render :edit
       end
     else # 下書きレシピの更新（非公開）の場合
       @post_recipe.is_draft = true
       if @post_recipe.update(post_recipe_params)
-        redirect_to confirm_path, notice: "下書きレシピを更新しました！"
+        flash[:notice] = "下書きレシピを更新しました！"
+        redirect_to confirm_path
       else
-        render :edit, alert: "更新できませんでした。お手数ですが、入力内容をご確認のうえ再度お試しください"
+        flash[:alert] = "更新できませんでした。お手数ですが、入力内容をご確認のうえ再度お試しください。"
+        render :edit
       end
     end
   end
