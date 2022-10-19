@@ -1,4 +1,11 @@
 <div class="container mb-5">
-  <h4 class="text-center mb-3"><%= @user.name %>さんのいいね♡レシピ</h4>
-  <%= render 'public/post_recipes/post_recipes' %>
+  <h4 class="text-center mb-3"><%= @user.name %>さんのいいね<i class="fa-solid fa-heart"></i>レシピ</h4>
+  <% if @user.favorites == [] %>
+    <p class="text-center mt-5">
+      <%= @user.name %>さんがいいねしたレシピはまだありません。<br>
+      お気に入りレシピにいいね<i class="fa-solid fa-heart"></i>しよう！
+    </p>
+  <% else %>
+    <%= render 'public/post_recipes/post_recipes' %>
+  <% end %>
 </div>
