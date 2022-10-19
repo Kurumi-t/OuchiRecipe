@@ -23,10 +23,16 @@ class PostRecipe < ApplicationRecord
     end
     recipe_image.variant(resize_to_limit: [width, height]).processed
   end
+
   def favorited_by?(user)
     favorites.exists?(user_id: user.id)
   end
+
   def self.search(words)
-    @post_recipe = PostRecipe.where("title LIKE ?", "#{words}%").where(is_draft: false)
+    @post_recipe = PostRecipe.where("title LIKE ?", "%#{words}%").where(is_draft: false)
+  end
+
+  def self.create_all_ranks
+    PostRecipe.find(Favorite.group(:post_recipe_id).order('count(post_recipe_id) desc').limit(4).pluck(:post_recipe_id))
   end
 end
