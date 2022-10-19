@@ -1,4 +1,5 @@
 class Admin::PostRecipesController < ApplicationController
+  before_action :authenticate_admin!
   def index
     @post_recipes = PostRecipe.where("is_draft = ?", false).page(params[:page]).per(20)
   end

@@ -1,4 +1,5 @@
 class Admin::UsersController < ApplicationController
+  before_action :authenticate_admin!
   def show
     @user = User.find(params[:id])
     @post_recipes = @user.post_recipes.where("user_id = ? and is_draft = ?", @user.id, false).page(params[:page]).per(16)

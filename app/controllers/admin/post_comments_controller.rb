@@ -1,4 +1,5 @@
 class Admin::PostCommentsController < ApplicationController
+  before_action :authenticate_admin!
   def index
     @post_recipe = PostRecipe.find(params[:post_recipe_id])
     post_comments = @post_recipe.post_comments
