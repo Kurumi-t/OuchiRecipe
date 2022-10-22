@@ -65,3 +65,5 @@ gem 'image_processing'
 
 gem 'cocoon'
 gem 'jquery-rails'
+
+gem 'rails-i18n'
