@@ -1,5 +1,5 @@
-<div class="container mb-5">
-  <h5 class="text-center mb-3">買い物リスト</h5>
+<div class="container mt-3 mb-5">
+  <h4 class="text-center mb-3">買い物リスト</h4>
   <%= form_with model: @shopping_list, local: true do |f| %>
     <div class="col-12 col-lg-8 mx-auto">
       <div class="row">
@@ -18,27 +18,27 @@
       </div>
     </div>
   <% end %>
-  <div class="row pt-3 pb-3">
+  <div class="row pb-3">
     <div class="col-12 col-lg-10 mx-auto">
       <% @shopping_lists.each do |shopping_list| %>
         <%= form_with model: @shopping_list, url: shopping_list_path(shopping_list.id), method: :PATCH, local: true do |f| %>
           <div class="row mt-2 mb-2 pb-2 align-items-end border-bottom">
-            <div class="col-7 order-1 order-sm-1 col-sm-6">
+            <div class="col-7 order-1 order-md-1 col-md-6">
               <%= shopping_list.food_name %>
             </div>
-            <div class="col-3 order-2 order-sm-2 col-sm-2 text-center">
+            <div class="col-3 order-2 order-md-2 col-md-2 text-center">
               <%= rounded_decimel(shopping_list.amount) %><%= shopping_list.unit %>
             </div>
-            <div class="col-3 order-4 offset-5 offset-sm-0 order-sm-3 col-sm mt-2">
+            <div class="col-3 order-4 offset-5 offset-md-0 order-md-3 col-md mt-2">
               <%= f.number_field :amount, step: "0.1", min: 0, max: 2000, class: "form-control" %>
             </div>
-            <div class="col-2 order-5 order-sm-4 col-sm px-0">
+            <div class="col-2 order-5 order-md-4 col-md px-0">
               <%= shopping_list.unit %>
             </div>
-            <div class="col-4 order-6 order-sm-5 col-sm px-0">
+            <div class="col-2 order-6 order-md-5 col-md px-0">
               <%= f.submit '変更', class:"btn btn-info font-weight-bold px-2" %>
             </div>
-            <div class="col-2 order-3 order-sm-6 col-sm px-0">
+            <div class="col-2 order-3 order-md-6 col-md px-0">
               <%= link_to("削除", shopping_list_path(shopping_list.id), method: :delete, class: "btn btn-danger font-weight-bold px-2") %>
             </div>
           </div>
@@ -48,7 +48,10 @@
     <div class="row mx-auto text-center pt-2">
       <div class="col">
         <% if @shopping_lists == [] %>
-          <p>買い物リストはありません。買い物リストを作ろう！</p>
+          <p>
+            買い物リストはありません。<br>
+            入力するか、レシピから追加して買い物リストを作ろう！
+          </p>
         <% else %>
           <%= link_to("買い物リストを全て削除する", shopping_lists_destroy_all_path, method: :delete, class: "btn btn-outline-danger px-3 mx-2 mb-2") %>
           <%= link_to("冷蔵庫に入れる", to_fridge_path, class: "btn btn-outline-info px-3 mx-2 mb-2") %>

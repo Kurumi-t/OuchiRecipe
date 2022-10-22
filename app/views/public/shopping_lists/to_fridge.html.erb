@@ -1,6 +1,6 @@
-<div class="container mb-5">
-  <h5 class="text-center">買い物リストから冷蔵庫へ入れる</h5>
-  <div class="row pt-3 pb-3">
+<div class="container mt-3 mb-5">
+  <h4 class="text-center">買い物リストから冷蔵庫へ入れる</h4>
+  <div class="row mb-3">
     <div class="col-12 col-lg-10 mx-auto">
       <% @shopping_lists.each do |shopping_list| %>
         <%= form_with model: @fridge, url: fridge_create_path, method: :POST, local: true do |f| %>
