@@ -4,17 +4,17 @@ class PostRecipe < ApplicationRecord
   has_many :making_recipes, dependent: :destroy
   has_many :post_comments, dependent: :destroy
   has_many :favorites, dependent: :destroy
-  accepts_nested_attributes_for :ingredients, :making_recipes, allow_destroy: true, reject_if: :all_blank
+  accepts_nested_attributes_for :ingredients, :making_recipes, allow_destroy: true
 
   has_one_attached :recipe_image
   with_options presence: true, on: :publicize do
     validates :recipe_image
-    validates :title
+    validates :title, length: { maximum: 20 }
     validates :serving
-    validates :advice
+    validates :advice, length: { maximum: 80 }
   end
-  validates :title, length: { maximum: 14 }, on: :publicize
-  validates :advice, length: { maximum: 80 }, on: :publicize
+  validates_associated :making_recipes
+  validates_associated :ingredients
 
   def get_recipe_image(width, height)
     unless recipe_image.attached?
