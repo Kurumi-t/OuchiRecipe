@@ -18,7 +18,39 @@ ja:
       next: <i class="fas fa-angle-right"></i>
       truncate: "..."
   activerecord:
+    models:
+      admin: 管理者
+      favorite: いいね
+      fridge: 冷蔵庫
+      ingredient: 材料
+      making_recipe: 作り方
+      post_comment: コメント
+      post_recipe: レシピ
+      shopping_list: 買い物リスト
     attributes:
+      fridge:
+        genre: ジャンル
+        amount: 数量
+        unit: 単位
+      ingredients:
+        food_name: 食材名
+        amount: 数量
+        unit: 単位
+        other_amount: 数量の補足
+      making_recipes:
+        recipe: 作り方
+      post_comment:
+        comment: コメント
+      post_recipe:
+        recipe_image: 画像
+        title: タイトル
+        serving: 何人分か
+        advice: コツ・おすすめ・ひとこと
+        is_draft: 公開
+      shopping_list:
+        food_name: 食材名
+        amount: 数量
+        unit: 単位
       user:
         confirmation_sent_at: パスワード確認送信時刻
         confirmation_token: パスワード確認用トークン
