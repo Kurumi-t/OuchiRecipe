@@ -61,9 +61,11 @@
       </nav>
     </header>
     <main>
-      <div class="text-center">
-        <p><%= notice %><%= alert %></p>
-      </div>
+      <% if flash[:notice] %>
+        <p class="alert alert-success text-center"><%= notice %></p>
+      <% elsif flash[:alert] %>
+        <p class="alert alert-danger text-center"><%= alert %></p>
+      <% end %>
       <%= yield %>
     </main>
     <footer class="sticky-bottom fixed-bottom bg-white">
