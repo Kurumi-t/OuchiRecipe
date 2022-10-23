@@ -42,13 +42,13 @@ ja:
       post_comment:
         comment: コメント
       post_recipe:
-        recipe_image: 画像
+        recipe_image: 写真
         title: タイトル
         serving: 何人分か
         advice: コツ・おすすめ・ひとこと
         is_draft: 公開
       shopping_list:
-        food_name: 食材名
+        food_name: 材料
         amount: 数量
         unit: 単位
       user:
