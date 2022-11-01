@@ -4,7 +4,7 @@
     <div class="col-12 col-md-3 col-lg-2">
       <div class="row text-center">
         <div class="col-12 mb-3">
-          <%= image_tag @user.get_profile_image(480,480), class:"col-10 col-sm-12 img-fluid rounded-circle" %>
+          <%= image_tag @user.get_profile_image(480,480), class:"col-10 col-sm-12 rounded-circle" %>
         </div>
         <div class="col-6 col-md-12">
           <%= link_to edit_user_path(@user.id), class: "btn btn-outline-success" do %>
@@ -44,7 +44,7 @@
     <div class="col-12 col-md-9 col-lg-10">
       <h4 class="text-center"><%= @user.name %>さんのレシピ<span class="ml-3"><%= @post_recipe_count %>品</span></h4>
       <div class="row text-center mt-3">
-        <div class="col-12 col-lg-10 mx-auto mt-5">
+        <div class="col-12 mx-auto mt-5">
           <% if @post_recipe_count == 0 %>
             <p>
               <%= @user.name %>さんのレシピはまだありません。<br>
